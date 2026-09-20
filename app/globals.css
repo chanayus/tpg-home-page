@@ -1,0 +1,228 @@
+@import "tailwindcss";
+
+:root {
+  --brand: #c5307d;
+  --brand-deep: #a3175f;
+  --brand-darkest: #5c0033;
+  --brand-hover: #8e1461;
+  --ink: #241a1f;
+  --cream: #fffaf9;
+  --blush: #fdf1f7;
+  --petal: #f5c3dc;
+  --gold: #ffd76a;
+  --gold-ink: #5c3d00;
+  --line-green: #06c755;
+}
+
+@theme inline {
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-darkest: var(--brand-darkest);
+  --color-brand-hover: var(--brand-hover);
+  --color-ink: var(--ink);
+  --color-cream: var(--cream);
+  --color-blush: var(--blush);
+  --color-petal: var(--petal);
+  --color-gold: var(--gold);
+  --color-gold-ink: var(--gold-ink);
+  --color-line-green: var(--line-green);
+
+  --font-display: var(--font-prompt);
+  --font-sans: var(--font-noto-sans-thai);
+  --text-section: clamp(28px, 4vw, 42px);
+  --spacing-section: clamp(60px, 7vw, 100px);
+  --tracking-tight: -0.02rem;
+
+  --text-2xs: 10px;
+}
+
+@layer base {
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--font-noto-sans-thai), sans-serif;
+  }
+
+  a {
+    color: var(--brand);
+    transition: color 0.25s;
+  }
+
+  a:hover {
+    color: var(--brand-hover);
+  }
+
+  ::selection {
+    background: var(--brand);
+    color: var(--cream);
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  max-width: 1360px;
+  padding-inline: 1.25rem;
+}
+
+@layer components {
+  /* For Swiper */
+  .swiper-pagination-bullet {
+    width: calc(var(--spacing) * 2);
+    height: calc(var(--spacing) * 2);
+    border-radius: 9999px;
+    background-color: color-mix(in oklab, var(--brand) 25%, transparent);
+    cursor: pointer;
+    transition:
+      background-color 150ms,
+      width 150ms;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: calc(var(--spacing) * 5);
+    background-color: var(--brand);
+  }
+
+  .swiper-button-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .swiper-button-lock,
+  .swiper-pagination-lock {
+    display: none;
+  }
+}
+
+@layer components {
+  [data-reveal="block"] {
+    opacity: 0;
+  }
+
+  [data-reveal="children"] > * {
+    opacity: 0;
+  }
+
+  /* No scripting means no animation to reveal it — never leave it hidden. */
+  @media (scripting: none) {
+    [data-reveal],
+    [data-reveal] > * {
+      opacity: 1;
+    }
+  }
+}
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--spacing) * 2);
+  font-weight: 800;
+  white-space: nowrap;
+  --btn-shadow: color-mix(in oklab, var(--brand) 45%, transparent);
+  transition-property: color, background-color, border-color, transform, box-shadow;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -4px var(--btn-shadow);
+  }
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 10px -2px var(--btn-shadow);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition-property: color, background-color, border-color, box-shadow;
+    &:hover,
+    &:active {
+      transform: none;
+    }
+  }
+}
+
+@utility btn-primary {
+  background-color: var(--brand);
+  color: var(--cream);
+  &:hover {
+    background-color: var(--brand-hover);
+    color: var(--cream);
+  }
+}
+
+@utility btn-outline {
+  border-width: 1px;
+  border-color: color-mix(in oklab, var(--brand) 35%, transparent);
+  color: var(--ink);
+  &:hover {
+    border-color: var(--brand);
+    color: var(--ink);
+  }
+}
+
+@utility btn-white {
+  background-color: #fff;
+  color: var(--brand-deep);
+  --btn-shadow: color-mix(in oklab, var(--brand-darkest) 40%, transparent);
+  &:hover {
+    color: var(--brand-darkest);
+  }
+}
+
+@utility btn-outline-white {
+  border-width: 2px;
+  border-color: color-mix(in oklab, white 70%, transparent);
+  color: #fff;
+  --btn-shadow: color-mix(in oklab, white 45%, transparent);
+  &:hover {
+    border-color: #fff;
+    color: #fff;
+  }
+}
+
+@utility btn-line {
+  background-color: var(--line-green);
+  color: #fff;
+  --btn-shadow: color-mix(in oklab, var(--line-green) 50%, transparent);
+  &:hover {
+    color: #fff;
+  }
+}
+
+@utility btn-lg {
+  padding-inline: calc(var(--spacing) * 6);
+  padding-block: calc(var(--spacing) * 3);
+  font-size: var(--text-sm);
+
+  @media (min-width: 640px) {
+    padding-inline: calc(var(--spacing) * 8.5);
+    padding-block: calc(var(--spacing) * 4);
+    font-size: 1rem;
+  }
+}
+
+@utility btn-sm {
+  padding-inline: calc(var(--spacing) * 5);
+  padding-block: calc(var(--spacing) * 2.5);
+  font-size: var(--text-sm);
+}
+
+@keyframes tp-ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-ticker {
+  animation: tp-ticker 60s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker {
+    animation: none;
+  }
+}
