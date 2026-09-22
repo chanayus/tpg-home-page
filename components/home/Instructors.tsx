@@ -9,11 +9,6 @@ import tKedPhoto from "@/public/images/t-ked.webp";
 import tWinPhoto from "@/public/images/t-win.webp";
 import { Reveal } from "../Reveal";
 
-const floatingStudents = [
-  { photo: studentGirlArt, position: { top: "4%", right: "3%" }, width: "10rem", rotate: 8, y: [0, -8, 0], duration: 3.6 },
-  { photo: studentBoyArt, position: { bottom: "4%", left: "2%" }, width: "13.125rem", rotate: -6, y: [0, -10, 0], duration: 4.2 },
-];
-
 const chipVariants = [
   { bg: "bg-tint-pink", text: "text-brand-deep" },
   { bg: "bg-tint-purple", text: "text-purple-deep" },
@@ -51,19 +46,25 @@ export function Instructors() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section id="team" aria-labelledby="instructors-title" className="relative z-0  overflow-hidden py-section">
-      {floatingStudents.map((student, i) => (
-        <motion.div
-          key={i}
-          aria-hidden
-          className="pointer-events-none absolute -z-10"
-          style={{ ...student.position, width: student.width, rotate: student.rotate }}
-          animate={shouldReduceMotion ? undefined : { y: student.y }}
-          transition={{ duration: student.duration, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <Image src={student.photo} alt="" className="block h-auto w-full" />
-        </motion.div>
-      ))}
+    <section id="team" aria-labelledby="instructors-title" className="relative z-0 py-section">
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute -z-10"
+        style={{ top: "4%", right: "3%", width: "10rem", rotate: 8 }}
+        animate={shouldReduceMotion ? undefined : { y: [0, -8, 0] }}
+        transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <Image src={studentGirlArt} alt="" className="block h-auto w-full" />
+      </motion.div>
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute z-1 bottom-[-14%] max-xl:hidden"
+        style={{  left: "2%", width: "11rem", rotate: -6 }}
+        animate={shouldReduceMotion ? undefined : { y: [0, -10, 0] }}
+        transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <Image src={studentBoyArt} alt="" className="block h-auto w-full" />
+      </motion.div>
 
       <hgroup className="container relative z-1">
         <Reveal as="h2" id="instructors-title" className="text-stroke-lg spark-after font-display text-section font-extrabold">
@@ -81,23 +82,23 @@ export function Instructors() {
             amount="some"
             className="flex w-full items-center justify-center"
           >
-            <article className="mx-auto flex w-full max-w-4xl border border-brand-deep/20 flex-col items-start xl:gap-8 gap-6 gap-y-8 rounded-panel bg-white lg:p-10 p-6 lg:pr-4 shadow-[0_22px_44px_rgba(255,0,126,0.14)] lg:flex-row">
-              <figure className="relative xl:w-40 w-32 max-lg:hidden shrink-0 ">
-                <div
-                  style={{ background: "linear-gradient(165deg, #fff0f8, #ffb5d9)", rotate: `${inst.photoRotate}deg` }}
-                  className="overflow-hidden rounded-photo border-[6px] border-white shadow-[0_18px_34px_rgba(120,0,60,0.22)]"
-                >
+            <article className="mx-auto flex w-full max-w-4xl border border-brand-deep/20 flex-col items-start xl:gap-8 gap-6 gap-y-8 rounded-panel bg-white lg:p-10 p-6 lg:pr-4 shadow-[0_22px_44px_rgba(255,0,126,0.14)] lg:flex-row transition-transform duration-300 ease-out hover:-translate-y-2">
+              <figure
+                style={{ rotate: `${inst.photoRotate}deg` }}
+                className="shadow-[0_18px_34px_rgba(120,0,60,0.22)] relative bg-white overflow-hidden rounded-md xl:w-40 w-32 max-lg:hidden shrink-0 p-1.5"
+              >
+                <div style={{ background: "linear-gradient(165deg, #fff0f8, #ffb5d9)" }} className="rounded bg-white">
                   <Image src={inst.photo} alt="" className="block size-full object-cover object-top" sizes="(max-width: 640px) 200px, 280px" />
                 </div>
               </figure>
 
               <div className="flex-1 space-y-6 text-left w-full">
                 <header className="gap-x-6 flex">
-                  <figure className="relative lg:hidden shrink-0 sm:w-32 w-27">
-                    <div
-                      style={{ background: "linear-gradient(165deg, #fff0f8, #ffb5d9)", rotate: `${inst.photoRotate}deg` }}
-                      className="overflow-hidden rounded-photo border-[6px] border-white shadow-[0_18px_34px_rgba(120,0,60,0.22)]"
-                    >
+                  <figure
+                    style={{ rotate: `${inst.photoRotate}deg` }}
+                    className="shadow-[0_18px_34px_rgba(120,0,60,0.22)] relative bg-white overflow-hidden rounded-md sm:w-32 w-27 lg:hidden shrink-0 p-1.5"
+                  >
+                    <div style={{ background: "linear-gradient(165deg, #fff0f8, #ffb5d9)" }} className="rounded bg-white">
                       <Image src={inst.photo} alt="" className="block size-full object-cover object-top" sizes="(max-width: 640px) 200px, 280px" />
                     </div>
                   </figure>

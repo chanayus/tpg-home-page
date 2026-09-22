@@ -77,10 +77,7 @@ export function Hero() {
             className={`font-display text-[clamp(86px,10.5vw,140px)] text-shadow-[0_6px_0_rgba(120,0,60,0.16)]  leading-[0.82] font-medium tracking-tight text-white ${shouldReduceMotion ? "" : "opacity-0"}`}
           >
             <span className="text-stroke-lg block">สอบติด</span>
-            <span className="text-stroke-lg relative mt-1.5 block w-max max-w-full">
-              ไปด้วยกัน
-              <IconSpark className="absolute top-[-0.12em] right-[-0.34em] h-[0.36em] w-[0.36em] text-gold" />
-            </span>
+            <span className="text-stroke-lg relative mt-1.5 block w-max max-w-full">ไปด้วยกัน</span>
           </h1>
           <p className={`mt-7.5 max-w-96 text-balance text-lg leading-relaxed text-white/80 ${shouldReduceMotion ? "" : "opacity-0"}`}>
             <strong className="font-bold">The Progress เป็นมากกว่ากวดวิชา แต่เป็นพี่ร่วมทาง</strong>
@@ -108,13 +105,13 @@ export function Hero() {
         <div className="relative mx-auto aspect-[1/1.04] w-full max-w-135 max-[860px]:max-w-110" aria-label="พี่วินและพี่เกด">
           <div
             style={{ background: "linear-gradient(165deg, #fff0f8, #ffb5d9)" }}
-            className={`hero-photo-win absolute top-0 right-[3%] w-[54%] overflow-hidden rounded-photo border-[6px] border-white shadow-[0_30px_54px_rgba(120,0,60,0.34)] ${shouldReduceMotion ? "rotate-[-5deg]" : "opacity-0"}`}
+            className={`hero-photo-win absolute top-0 right-[3%] w-[54%] overflow-hidden rounded-xl border-[6px] border-white shadow-[0_30px_54px_rgba(120,0,60,0.34)] ${shouldReduceMotion ? "rotate-[-5deg]" : "opacity-0"}`}
           >
             <Image src={tWinPhoto} alt="พี่วิน ติวเตอร์ TGAT ของ The Progress" className="block aspect-670/940 size-full object-cover object-top" sizes="(max-width: 1024px) 54vw, 380px" priority />
           </div>
           <div
             style={{ background: "linear-gradient(165deg, #fff0f8, #ffb5d9)" }}
-            className={`hero-photo-ked absolute bottom-0 left-[1%] z-2 w-[45%] overflow-hidden rounded-photo border-[6px] border-white shadow-[0_30px_54px_rgba(120,0,60,0.34)] ${shouldReduceMotion ? "rotate-[4deg]" : "opacity-0"}`}
+            className={`hero-photo-ked absolute bottom-0 left-[1%] z-2 w-[45%] overflow-hidden rounded-xl border-[6px] border-white shadow-[0_30px_54px_rgba(120,0,60,0.34)] ${shouldReduceMotion ? "rotate-[4deg]" : "opacity-0"}`}
           >
             <Image src={tKedPhoto} alt="พี่เกด ติวเตอร์ภาษาอังกฤษของ The Progress" className="block aspect-500/779 size-full object-cover object-top" sizes="(max-width: 1024px) 45vw, 320px" />
           </div>

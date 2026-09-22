@@ -17,8 +17,8 @@ export function CtaBanner() {
             <IconSquiggle preserveAspectRatio="none" className="pointer-events-none absolute top-[-46%] right-[-6%] h-192 w-auto rotate-180 -scale-x-100 text-white/12" />
           </SquiggleReveal>
           <Reveal stagger={0.12} amount={0.5}>
-            <IconSpark className="pointer-events-none absolute top-[16%] right-[12%] w-13.5 text-white" />
-            <IconSpark className="pointer-events-none absolute bottom-[22%] left-[15%] w-6 text-gold" />
+            <IconSpark className="pointer-events-none absolute top-[16%] lg:right-[12%] right-8 sm:w-13.5 w-8 text-white" />
+            <IconSpark className="pointer-events-none absolute lg:bottom-[21%] lg:left-[15%] bottom-8 left-4 w-6 text-gold" />
           </Reveal>
 
           <Reveal className="relative z-2 mx-auto max-w-3xl" stagger={0.1} amount={0.5}>

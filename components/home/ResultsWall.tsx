@@ -5,7 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useScroll, useTransform, type MotionStyle, type MotionValue } from "motion/react";
 import { IoClose } from "react-icons/io5";
 import { Reveal } from "../Reveal";
-import mascotGoSticker from "@/public/images/stickers/mascot-go.webp";
+import readingAreaSticker from "@/public/images/stickers/reading-area.webp";
 import passExamSticker from "@/public/images/stickers/badge-pass-exam.webp";
 import thumbsUpSticker from "@/public/images/stickers/thumbs-up.webp";
 
@@ -109,7 +109,7 @@ function ReviewCard({
 const STICKER_DURATION = 0.18;
 
 const stickers = [
-  { src: mascotGoSticker, alt: "สติกเกอร์การ์ตูน GO ลุยข้อสอบ", top: "12%", side: "left" as const, width: 168, rotate: 10, start: 0.1 },
+  { src: readingAreaSticker, alt: "สติกเกอร์การ์ตูน GO ลุยข้อสอบ", top: "12%", side: "left" as const, width: 168, rotate: 10, start: 0.1 },
   { src: passExamSticker, alt: "สติกเกอร์คนนี้สอบติด", top: "42%", side: "right" as const, width: 190, rotate: -16, start: 0.42 },
   { src: thumbsUpSticker, alt: "สติกเกอร์นิ้วโป้งให้กำลังใจ", top: "78%", side: "left" as const, width: 150, rotate: 12, start: 0.72 },
 ];

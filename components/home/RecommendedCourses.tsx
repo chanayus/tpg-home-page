@@ -52,7 +52,7 @@ export function RecommendedCourses() {
         <ul className="grid max-w-290 grid-cols-[repeat(auto-fit,minmax(min(100%,270px),1fr))] gap-6">
           {courses.map((course) => (
             <Reveal as="li" key={course.id}>
-              <article className="flex h-full flex-col overflow-hidden rounded-photo bg-white shadow-[0_22px_44px_rgba(255,0,126,0.16)] transition-transform ">
+              <article className="flex h-full flex-col overflow-hidden rounded-photo bg-white shadow-[0_22px_44px_rgba(255,0,126,0.16)] transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_28px_52px_rgba(255,0,126,0.24)]">
                 <figure style={{ background: course.cover }} className="relative flex aspect-video items-end overflow-hidden px-6.5 pb-4">
                   <div className="grain-overlay absolute" />
                   <IconSpark className="absolute top-[14%] right-[9%] w-11 text-white/90" />

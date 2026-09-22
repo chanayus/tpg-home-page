@@ -5,7 +5,6 @@ import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { HiHeart, HiPlus, HiUserGroup, HiUserPlus } from "react-icons/hi2";
 import type { IconType } from "react-icons";
-import badgeStartSticker from "@/public/images/stickers/badge-start.webp";
 import cardDreamUniversitySticker from "@/public/images/stickers/card-dream-university.webp";
 import { Reveal } from "../Reveal";
 
@@ -128,7 +127,7 @@ export function WhyUs() {
   }
 
   return (
-    <section id="why" aria-labelledby="why-title" className="grid-tint-bg relative overflow-hidden bg-white py-section">
+    <section id="why" aria-labelledby="why-title" className="relative overflow-hidden py-section">
       <motion.div
         className="pointer-events-none absolute top-8.5 right-[5%] z-0 w-[clamp(64px,9vw,120px)]"
         animate={shouldReduceMotion ? undefined : { y: [0, -8, 0], rotate: [-3, 3, -3] }}
@@ -136,13 +135,7 @@ export function WhyUs() {
       >
         <Image src={cardDreamUniversitySticker} alt="" className="h-auto w-full" />
       </motion.div>
-      <motion.div
-        className="pointer-events-none absolute bottom-18 left-[4%] z-0 w-40"
-        animate={shouldReduceMotion ? undefined : { y: [0, -6, 0], rotate: [3, -3, 3] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
-      >
-        <Image src={badgeStartSticker} alt="" className="h-auto w-full" />
-      </motion.div>
+
       <Reveal as="div" stagger={0.2} className="container relative z-1">
         <h2 id="why-title" className="text-stroke-lg spark-after font-display text-section font-extrabold">
           ทำไมต้อง <em className="text-brand not-italic">The Progress</em>
