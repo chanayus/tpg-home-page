@@ -35,7 +35,7 @@ type RevealProps<T extends ElementType> = RevealOwnProps & {
   as?: T;
 } & Omit<ComponentPropsWithoutRef<T>, keyof RevealOwnProps | "as">;
 
-export function Reveal<T extends ElementType = "div">({ as, children, stagger: staggerBy, delay = 0.2, amount = 0.5, repeat = false, keyframes, transition, ...rest }: RevealProps<T>) {
+export function Reveal<T extends ElementType = "div">({ as, children, stagger: staggerBy, delay = 0.2, amount = "some", repeat = false, keyframes, transition, ...rest }: RevealProps<T>) {
   const [scope, animate] = useAnimate<HTMLElement>();
   const isInView = useInView(scope, { once: !repeat, amount });
   const shouldReduceMotion = useReducedMotion();
