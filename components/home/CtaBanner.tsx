@@ -1,25 +1,44 @@
-import Link from "next/link";
+import { Button } from "@/components/Button";
 import { Reveal } from "../Reveal";
+import { SquiggleReveal } from "../SquiggleReveal";
+import { IconSpark, IconSquiggle } from "./SvgProps";
 
 export function CtaBanner() {
   return (
-    <section aria-labelledby="cta-title" style={{ background: "linear-gradient(120deg, #5c0033, #a3175f 55%, #c5307d)" }} className="py-16 text-center md:py-18 lg:py-24">
-      <Reveal className="mx-auto max-w-3xl" stagger={0.1} amount={0.5}>
-        <h2 id="cta-title" className="mb-5 font-display text-3xl leading-tight font-black tracking-tight text-white md:text-4xl lg:text-5xl">
-          พร้อมสอบติด
-          <br />
-          ไปด้วยกันหรือยัง?
-        </h2>
-        <p className="mb-9 text-base text-white/80 text-balance">ทักไลน์วันนี้ พี่วินพี่เกดตอบเอง ปรึกษาเส้นทางการเรียนได้ฟรี</p>
-        <div className="flex flex-wrap justify-center gap-3.5">
-          <a href={"https://line.me/R/ti/p/@453qifrr"} target="_blank" rel="noreferrer" className="btn btn-white btn-lg">
-            แอดไลน์ปรึกษาฟรี
-          </a>
-          <Link href="/courses" className="btn btn-outline-white btn-lg">
-            ทดลองเรียนฟรี
-          </Link>
+    <section className="py-[clamp(40px,6vw,72px)]">
+      <div className="container">
+        <div
+          style={{ background: "linear-gradient(255deg, #ff5aa9 0%, #ff1a8c 24%, #e0006f 60%, #c8005f 100%)" }}
+          className="relative overflow-hidden rounded-panel px-[clamp(20px,5vw,60px)] py-[clamp(48px,8vw,100px)] text-center text-white"
+        >
+          <div className="grain-overlay absolute" />
+          <SquiggleReveal amount={0.5}>
+            <IconSquiggle className="pointer-events-none absolute top-[-30%] left-[-4%] h-170 w-auto text-white/14" />
+            <IconSquiggle preserveAspectRatio="none" className="pointer-events-none absolute top-[-46%] right-[-6%] h-192 w-auto rotate-180 -scale-x-100 text-white/12" />
+          </SquiggleReveal>
+          <Reveal stagger={0.12} amount={0.5}>
+            <IconSpark className="pointer-events-none absolute top-[16%] right-[12%] w-13.5 text-white" />
+            <IconSpark className="pointer-events-none absolute bottom-[22%] left-[15%] w-6 text-gold" />
+          </Reveal>
+
+          <Reveal className="relative z-2 mx-auto max-w-3xl" stagger={0.1} amount={0.5}>
+            <h2 className="text-stroke-lg font-display text-[clamp(36px,6.5vw,67.2px)] leading-none font-extrabold text-balance text-shadow-[0_6px_0_rgba(120,0,60,0.16)]">
+              พร้อมสอบติด
+              <br />
+              ไปด้วยกันหรือยัง?
+            </h2>
+            <p className="mx-auto mt-4 mb-7 max-w-130 text-lg font-medium">ทักไลน์วันนี้ พี่วินพี่เกดตอบเอง ปรึกษาเส้นทางการเรียนได้ฟรี</p>
+            <div className="flex flex-wrap justify-center gap-3">
+              <Button className="min-w-48" variant="white" size="lg" href="https://line.me/R/ti/p/@453qifrr" target="_blank" rel="noreferrer">
+                แอดไลน์ปรึกษาฟรี
+              </Button>
+              <Button className="min-w-48" variant="glass" size="lg" href="https://line.me/R/ti/p/@453qifrr" target="_blank" rel="noreferrer">
+                ทดลองเรียนฟรี
+              </Button>
+            </div>
+          </Reveal>
         </div>
-      </Reveal>
+      </div>
     </section>
   );
 }

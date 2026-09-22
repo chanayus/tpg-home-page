@@ -1,37 +1,58 @@
 @import "tailwindcss";
 
 :root {
-  --brand: #c5307d;
-  --brand-deep: #a3175f;
-  --brand-darkest: #5c0033;
-  --brand-hover: #8e1461;
-  --ink: #241a1f;
-  --cream: #fffaf9;
-  --blush: #fdf1f7;
-  --petal: #f5c3dc;
-  --gold: #ffd76a;
-  --gold-ink: #5c3d00;
+  --brand: #ff007e;
+  --brand-mid: #e0006f;
+  --brand-deep: #c2005f;
+  --brand-hover: #c2005f;
+  --purple: #a145ff;
+  --purple-deep: #6a1fc4;
+  --purple-sticker: #9333ea;
+  --gold: #ffad02;
+  --gold-ink: #7a4c00;
+  --ink: #2b1220;
+  --ink-soft: #6d4a5e;
+  --cream: #ffffff;
+  --blush: #fff0f7;
+  --tint-pink: #ffe1f0;
+  --tint-purple: #f1e4ff;
+  --tint-yellow: #fff0cc;
+  --hair: rgba(255, 0, 126, 0.14);
   --line-green: #06c755;
+  --grad-pink: linear-gradient(135deg, #ff2d97 0%, #ff007e 55%, #e0006f 100%);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url%28%23n%29'/%3E%3C/svg%3E");
+  --spark-pink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff007e' d='M12 0c.9 7.4 4.6 11.1 12 12-7.4.9-11.1 4.6-12 12-.9-7.4-4.6-11.1-12-12C7.4 11.1 11.1 7.4 12 0z'/%3E%3C/svg%3E");
+  --spark-soft: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff007e' fill-opacity='.16' d='M12 0c.9 7.4 4.6 11.1 12 12-7.4.9-11.1 4.6-12 12-.9-7.4-4.6-11.1-12-12C7.4 11.1 11.1 7.4 12 0z'/%3E%3C/svg%3E");
 }
 
 @theme inline {
   --color-brand: var(--brand);
+  --color-brand-mid: var(--brand-mid);
   --color-brand-deep: var(--brand-deep);
-  --color-brand-darkest: var(--brand-darkest);
   --color-brand-hover: var(--brand-hover);
-  --color-ink: var(--ink);
-  --color-cream: var(--cream);
-  --color-blush: var(--blush);
-  --color-petal: var(--petal);
+  --color-purple: var(--purple);
+  --color-purple-deep: var(--purple-deep);
+  --color-purple-sticker: var(--purple-sticker);
   --color-gold: var(--gold);
   --color-gold-ink: var(--gold-ink);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-cream: var(--cream);
+  --color-blush: var(--blush);
+  --color-tint-pink: var(--tint-pink);
+  --color-tint-purple: var(--tint-purple);
+  --color-tint-yellow: var(--tint-yellow);
   --color-line-green: var(--line-green);
 
-  --font-display: var(--font-prompt);
-  --font-sans: var(--font-noto-sans-thai);
-  --text-section: clamp(28px, 4vw, 42px);
-  --spacing-section: clamp(60px, 7vw, 100px);
-  --tracking-tight: -0.02rem;
+  --font-display: var(--font-fc-friday), var(--font-noto-sans-thai), system-ui, sans-serif;
+  --font-sans: var(--font-fc-friday), var(--font-noto-sans-thai), system-ui, sans-serif;
+  --text-section: clamp(30px, 4.6vw, 48px);
+  --spacing-section: clamp(56px, 8vw, 104px);
+  --tracking-tight: -0.01em;
+
+  --radius-panel: 20px;
+  --radius-ui: 6px;
+  --radius-photo: 5%;
 
   --text-2xs: 10px;
 }
@@ -40,16 +61,18 @@
   body {
     background: var(--cream);
     color: var(--ink);
-    font-family: var(--font-noto-sans-thai), sans-serif;
+    font-family: var(--font-sans);
   }
 
   a {
-    color: var(--brand);
-    transition: color 0.25s;
+    color: inherit;
   }
 
-  a:hover {
-    color: var(--brand-hover);
+  h1,
+  h2,
+  h3,
+  p {
+    margin: 0;
   }
 
   ::selection {
@@ -64,32 +87,68 @@
   padding-inline: 1.25rem;
 }
 
-@layer components {
-  /* For Swiper */
-  .swiper-pagination-bullet {
-    width: calc(var(--spacing) * 2);
-    height: calc(var(--spacing) * 2);
-    border-radius: 9999px;
-    background-color: color-mix(in oklab, var(--brand) 25%, transparent);
-    cursor: pointer;
-    transition:
-      background-color 150ms,
-      width 150ms;
-  }
+/* Only one usable weight in the licensed font — headings fake their boldness with a hairline stroke, matching the client's own CI trick. */
+@utility text-stroke {
+  -webkit-text-stroke: 0.018em currentColor;
+}
 
-  .swiper-pagination-bullet-active {
-    width: calc(var(--spacing) * 5);
-    background-color: var(--brand);
-  }
+@utility text-stroke-lg {
+  -webkit-text-stroke: 0.022em currentColor;
 
-  .swiper-button-disabled {
-    opacity: 0.35;
+}
+
+@utility grain-overlay {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--grain);
+  background-size: 200px;
+  opacity: 0.3;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+@utility deco-sparkles {
+  &::before {
+    content: "";
+    position: absolute;
+    right: 5%;
+    top: 34px;
+    width: clamp(64px, 9vw, 120px);
+    aspect-ratio: 1;
+    background: var(--spark-soft) center / contain no-repeat;
     pointer-events: none;
   }
+  &::after {
+    content: "";
+    position: absolute;
+    left: 3%;
+    bottom: 40px;
+    width: clamp(34px, 4.5vw, 56px);
+    aspect-ratio: 1;
+    background: var(--spark-soft) center / contain no-repeat;
+    pointer-events: none;
+  }
+}
 
-  .swiper-button-lock,
-  .swiper-pagination-lock {
-    display: none;
+@utility bg-grad-pink {
+  background: var(--grad-pink);
+}
+
+@utility grid-tint-bg {
+  background-image: linear-gradient(rgba(255, 0, 126, 0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 0, 126, 0.055) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@utility spark-after {
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 0.42em;
+    height: 0.42em;
+    margin-left: 0.22em;
+    vertical-align: 0.5em;
+    background: var(--spark-pink) center / contain no-repeat;
   }
 }
 
@@ -109,106 +168,21 @@
       opacity: 1;
     }
   }
-}
 
-@utility btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: calc(var(--spacing) * 2);
-  font-weight: 800;
-  white-space: nowrap;
-  --btn-shadow: color-mix(in oklab, var(--brand) 45%, transparent);
-  transition-property: color, background-color, border-color, transform, box-shadow;
-  transition-duration: 150ms;
-  transition-timing-function: ease-out;
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 24px -4px var(--btn-shadow);
+  /* Same pending/done handoff as [data-reveal], but hides via an undrawn stroke instead of opacity. */
+  [data-squiggle-reveal="pending"] path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
   }
-  &:active {
-    transform: translateY(0);
-    box-shadow: 0 4px 10px -2px var(--btn-shadow);
-  }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .btn {
-    transition-property: color, background-color, border-color, box-shadow;
-    &:hover,
-    &:active {
-      transform: none;
+  @media (scripting: none) {
+    [data-squiggle-reveal="pending"] path {
+      stroke-dashoffset: 0;
     }
   }
 }
 
-@utility btn-primary {
-  background-color: var(--brand);
-  color: var(--cream);
-  &:hover {
-    background-color: var(--brand-hover);
-    color: var(--cream);
-  }
-}
-
-@utility btn-outline {
-  border-width: 1px;
-  border-color: color-mix(in oklab, var(--brand) 35%, transparent);
-  color: var(--ink);
-  &:hover {
-    border-color: var(--brand);
-    color: var(--ink);
-  }
-}
-
-@utility btn-white {
-  background-color: #fff;
-  color: var(--brand-deep);
-  --btn-shadow: color-mix(in oklab, var(--brand-darkest) 40%, transparent);
-  &:hover {
-    color: var(--brand-darkest);
-  }
-}
-
-@utility btn-outline-white {
-  border-width: 2px;
-  border-color: color-mix(in oklab, white 70%, transparent);
-  color: #fff;
-  --btn-shadow: color-mix(in oklab, white 45%, transparent);
-  &:hover {
-    border-color: #fff;
-    color: #fff;
-  }
-}
-
-@utility btn-line {
-  background-color: var(--line-green);
-  color: #fff;
-  --btn-shadow: color-mix(in oklab, var(--line-green) 50%, transparent);
-  &:hover {
-    color: #fff;
-  }
-}
-
-@utility btn-lg {
-  padding-inline: calc(var(--spacing) * 6);
-  padding-block: calc(var(--spacing) * 3);
-  font-size: var(--text-sm);
-
-  @media (min-width: 640px) {
-    padding-inline: calc(var(--spacing) * 8.5);
-    padding-block: calc(var(--spacing) * 4);
-    font-size: 1rem;
-  }
-}
-
-@utility btn-sm {
-  padding-inline: calc(var(--spacing) * 5);
-  padding-block: calc(var(--spacing) * 2.5);
-  font-size: var(--text-sm);
-}
-
-@keyframes tp-ticker {
+@keyframes tp-marquee {
   from {
     transform: translateX(0);
   }
@@ -217,12 +191,12 @@
   }
 }
 
-@utility animate-ticker {
-  animation: tp-ticker 60s linear infinite;
+@utility animate-marquee {
+  animation: tp-marquee 46s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-ticker {
+  .animate-marquee {
     animation: none;
   }
 }

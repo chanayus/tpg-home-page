@@ -2,26 +2,22 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { useAnimate, useReducedMotion, stagger, type AnimationPlaybackControls, type AnimationSequence } from "motion/react";
 
+import { Button } from "@/components/Button";
 import tKedPhoto from "@/public/images/t-ked.webp";
 import tWinPhoto from "@/public/images/t-win.webp";
-
-const heroStats = [
-  { value: "82.08", label: "คะแนน TGAT พี่วิน" },
-  { value: "9+", label: "ปีที่สอนมา" },
-  { value: "99.53", label: "เปอร์เซ็นไทล์ประเทศ" },
-];
+import { IconSpark, IconSquiggle } from "./SvgProps";
 
 /** มุมเอียงปลายทางของ entrance — ท่าลอยต้องแกว่งรอบค่านี้ ไม่ใช่รอบ 0 จึงถือไว้ที่เดียว */
-const tilt = { win: -6, ked: 5, badge: -8 };
+const tilt = { win: -5, ked: 4, sticker: -7, sticker2: 6, spark1: 10, spark2: 0, spark3: 12 };
 
 /** ลอยค้างหลัง entrance จบ คาบตั้งไม่ให้หารกันลงตัว สามชิ้นจะได้เลื่อนเฟสออกจากกันแทนที่จะขึ้นลงพร้อมกัน */
 const floats = [
   { selector: ".hero-photo-win", y: [0, -6], rotate: [tilt.win, tilt.win + 1.2], duration: 3.5 },
   { selector: ".hero-photo-ked", y: [0, -10], rotate: [tilt.ked, tilt.ked - 1], duration: 4.25 },
-  { selector: ".hero-badge-pop", y: [0, -5], rotate: [tilt.badge, tilt.badge + 0.6], duration: 3.25 },
+  { selector: ".hero-sticker-1", y: [0, -5], rotate: [tilt.sticker, tilt.sticker + 0.6], duration: 3.25 },
+  { selector: ".hero-sticker-2", y: [0, -5], rotate: [tilt.sticker2, tilt.sticker2 - 0.8], duration: 3.75 },
 ];
 
 export function Hero() {
@@ -31,17 +27,21 @@ export function Hero() {
   useEffect(() => {
     if (shouldReduceMotion) return;
     const sequence: AnimationSequence = [
-      [".hero-text > *", { opacity: [0, 1], y: [24, 0] }, { duration: 0.6, ease: "easeOut", delay: stagger(0.09, { startDelay: 0.05 }) }],
+      [".hero-squiggle path", { strokeDashoffset: [1, 0] }, { at: 0, duration: 0.75, ease: "easeInOut" }],
+      [".hero-text > *", { opacity: [0, 1], y: [24, 0] }, { at: 0, duration: 0.35, ease: "easeOut", delay: stagger(0.09, { startDelay: 0.05 }) }],
       [".hero-photo-win", { opacity: [0, 1], y: [-24, 0], rotate: [0, tilt.win], scale: [0.92, 1] }, { at: 0.3, type: "spring", stiffness: 120, damping: 14 }],
       [".hero-photo-ked", { opacity: [0, 1], y: [24, 0], rotate: [0, tilt.ked], scale: [0.92, 1] }, { at: "<+0.12", type: "spring", stiffness: 120, damping: 14 }],
-      [".hero-badge-pop", { opacity: [0, 1], scale: [0.4, 1], rotate: [0, tilt.badge] }, { at: "<+0.42", type: "spring", stiffness: 200, damping: 12 }],
+      [".hero-sticker-1", { opacity: [0, 1], scale: [0.4, 1], rotate: [0, tilt.sticker] }, { at: "<+0.42", type: "spring", stiffness: 200, damping: 12 }],
+      [".hero-sticker-2", { opacity: [0, 1], scale: [0.4, 1], rotate: [0, tilt.sticker2] }, { at: "<+0.08", type: "spring", stiffness: 200, damping: 12 }],
+      [".hero-spark-1", { opacity: [0, 1], scale: [0.3, 1], rotate: [0, tilt.spark1] }, { at: "<+0.1", type: "spring", stiffness: 240, damping: 14 }],
+      [".hero-spark-2", { opacity: [0, 1], scale: [0.3, 1], rotate: [0, tilt.spark2] }, { at: "<+0.06", type: "spring", stiffness: 240, damping: 14 }],
+      [".hero-spark-3", { opacity: [0, 1], scale: [0.3, 1], rotate: [0, tilt.spark3] }, { at: "<+0.06", type: "spring", stiffness: 240, damping: 14 }],
     ];
 
     let stopped = false;
     const entrance = animate(sequence);
     const running: AnimationPlaybackControls[] = [entrance];
 
-    // images floating animation
     entrance.then(() => {
       if (stopped) return;
       for (const { selector, duration, ...keyframes } of floats) {
@@ -56,57 +56,86 @@ export function Hero() {
   }, [animate, shouldReduceMotion]);
 
   return (
-    <section ref={scope} className="pt-[clamp(40px,6vw,64px)] pb-[clamp(60px,8vw,100px)]">
-      <div className="container grid grid-cols-1 items-center gap-18 lg:grid-cols-[1.1fr_0.9fr]">
+    <section
+      ref={scope}
+      className="relative z-2 overflow-hidden min-h-screen lg:pt-48 pt-32 pb-32 text-white"
+      style={{
+        background: "radial-gradient(46% 60% at 100% 0%, #ffd2ea 0%, rgba(255,210,234,0) 70%), linear-gradient(255deg, #ff8cc6 0%, #ff2d97 26%, #e8006f 54%, #d1006a 100%)",
+      }}
+    >
+      <div className="grain-overlay absolute" />
+      <IconSquiggle
+        className={`hero-squiggle pointer-events-none absolute top-[-8%] right-[-3%] z-0 h-[118%] w-auto text-white/17 max-[860px]:right-[-30%] max-[860px]:opacity-80 ${
+          shouldReduceMotion ? "" : "[&>path]:[stroke-dasharray:1] [&>path]:[stroke-dashoffset:1]"
+        }`}
+      />
+
+      <div className="container relative z-2 grid grid-cols-1 items-center gap-y-20 lg:grid-cols-[1.08fr_0.92fr]">
         <div className="hero-text">
-          <p className={`mb-6 inline-flex items-center gap-2 border border-brand px-4 py-1.5 sm:text-xs text-2xs font-bold tracking-wider text-brand-deep ${shouldReduceMotion ? "" : "opacity-0"}`}>
-            ● TGAT · A-LEVEL · ม.6 ยันสอบติด
-          </p>
-          <h1 className={`font-display text-6xl leading-none font-black tracking-tight text-ink md:text-7xl lg:text-8xl ${shouldReduceMotion ? "" : "opacity-0"}`}>
-            สอบติด
-            <br />
-            <span className="text-brand">ไม่ใช่โชค</span>
+          <p className={`tracking-wide mb-3 text-white w-fit rounded ${shouldReduceMotion ? "" : "opacity-0"}`}>(ติวสอบ TGAT · A-Level คณิต · อังกฤษ)</p>
+          <h1
+            className={`font-display text-[clamp(86px,10.5vw,140px)] text-shadow-[0_6px_0_rgba(120,0,60,0.16)]  leading-[0.82] font-medium tracking-tight text-white ${shouldReduceMotion ? "" : "opacity-0"}`}
+          >
+            <span className="text-stroke-lg block">สอบติด</span>
+            <span className="text-stroke-lg relative mt-1.5 block w-max max-w-full">
+              ไปด้วยกัน
+              <IconSpark className="absolute top-[-0.12em] right-[-0.34em] h-[0.36em] w-[0.36em] text-gold" />
+            </span>
           </h1>
-          <p className={`mt-6.5 mb-8 max-w-130 text-base leading-relaxed text-ink/65 md:text-lg ${shouldReduceMotion ? "" : "opacity-0"}`}>
-            The Progress ดูแลน้อง ๆ แบบใกล้ชิด ไม่ใช่แค่สอนตามตำรา แต่วางแผนเป็นรายคนจนถึงวันโค้งสุดท้าย พี่วิน พี่เกด สอนเอง ดูแลเอง ทุกคน
+          <p className={`mt-7.5 max-w-96 text-balance text-lg leading-relaxed text-white/80 ${shouldReduceMotion ? "" : "opacity-0"}`}>
+            <strong className="font-bold">The Progress เป็นมากกว่ากวดวิชา แต่เป็นพี่ร่วมทาง</strong>
+            ที่ดูแลน้อง ๆ อย่างใกล้ชิดด้วยตัวเอง ผ่านระบบการเรียนแบบใหม่ และเข้าใจในทุกช่วงของการเติบโต เดินเคียงข้างไปด้วยกัน จนถึงวันที่น้องสอบติด^^
           </p>
-          <div className={`mb-10 flex flex-wrap gap-3.5 ${shouldReduceMotion ? "" : "opacity-0"}`}>
-            <Link href="/courses" className="btn btn-primary btn-lg">
+
+          <div className={`mt-6.5 flex flex-wrap gap-3 ${shouldReduceMotion ? "" : "opacity-0"}`}>
+            <Button variant="white" size="lg" href="#courses">
               ดูคอร์สทั้งหมด
-            </Link>
-            <Link href="/courses" className="btn btn-outline btn-lg">
+            </Button>
+            <Button variant="glass" size="lg" href="https://line.me/R/ti/p/@453qifrr" target="_blank" rel="noreferrer">
               ทดลองเรียนฟรี
-            </Link>
+            </Button>
           </div>
-          <dl className={`flex flex-wrap border-t border-brand/15 pt-6 gap-8 lg:gap-11 ${shouldReduceMotion ? "" : "opacity-0"}`}>
-            {heroStats.map((stat) => (
-              <div key={stat.label}>
-                <dd className="font-display text-2xl font-black text-ink lg:text-3xl">{stat.value}</dd>
-                <dt className="mt-0.5 text-xs text-ink/55">{stat.label}</dt>
-              </div>
-            ))}
-          </dl>
+          <div className={`mt-8.5 ${shouldReduceMotion ? "" : "opacity-0"}`}>
+            <p className="mb-3 text-sm font-semibold tracking-wide text-white/80">คติพจน์ของเรา</p>
+            <div className="flex flex-wrap items-center gap-2 text-lg  w-fit">
+              <p className="border px-4 rounded border-white/50">ใส่ใจ</p>
+              <p className="border px-4 rounded border-white/50">ใกล้ชิด</p>
+              <p className="border px-4 rounded border-white/50">สอบติดไปด้วยกัน</p>
+            </div>
+          </div>
         </div>
 
-        <div className="relative mx-auto aspect-square w-full max-lg:max-w-lg">
+        <div className="relative mx-auto aspect-[1/1.04] w-full max-w-135 max-[860px]:max-w-110" aria-label="พี่วินและพี่เกด">
           <div
-            style={{ background: "linear-gradient(160deg, #fdeef5, #f5c3dc)" }}
-            className={`hero-photo-win absolute top-0 right-[10%] w-1/2 aspect-670/940 overflow-hidden border-2 border-brand shadow-[0_20px_50px_rgba(197,48,125,0.18)] ${shouldReduceMotion ? "-rotate-6" : "opacity-0"}`}
+            style={{ background: "linear-gradient(165deg, #fff0f8, #ffb5d9)" }}
+            className={`hero-photo-win absolute top-0 right-[3%] w-[54%] overflow-hidden rounded-photo border-[6px] border-white shadow-[0_30px_54px_rgba(120,0,60,0.34)] ${shouldReduceMotion ? "rotate-[-5deg]" : "opacity-0"}`}
           >
-            <Image src={tWinPhoto} alt="พี่วิน ติวเตอร์ TGAT ของ The Progress" className="block size-full object-cover" sizes="(max-width: 1024px) 50vw, 360px" priority />
+            <Image src={tWinPhoto} alt="พี่วิน ติวเตอร์ TGAT ของ The Progress" className="block aspect-670/940 size-full object-cover object-top" sizes="(max-width: 1024px) 54vw, 380px" priority />
           </div>
           <div
-            style={{ background: "linear-gradient(160deg, #fdeef5, #f5c3dc)" }}
-            className={`hero-photo-ked absolute bottom-0 left-[2%] z-2 w-2/5 aspect-500/779 overflow-hidden border-2 border-brand-deep shadow-[0_20px_50px_rgba(197,48,125,0.18)] ${shouldReduceMotion ? "rotate-5" : "opacity-0"}`}
+            style={{ background: "linear-gradient(165deg, #fff0f8, #ffb5d9)" }}
+            className={`hero-photo-ked absolute bottom-0 left-[1%] z-2 w-[45%] overflow-hidden rounded-photo border-[6px] border-white shadow-[0_30px_54px_rgba(120,0,60,0.34)] ${shouldReduceMotion ? "rotate-[4deg]" : "opacity-0"}`}
           >
-            <Image src={tKedPhoto} alt="พี่เกด ติวเตอร์ภาษาอังกฤษของ The Progress" className="block size-full object-cover" sizes="(max-width: 1024px) 40vw, 280px" />
+            <Image src={tKedPhoto} alt="พี่เกด ติวเตอร์ภาษาอังกฤษของ The Progress" className="block aspect-500/779 size-full object-cover object-top" sizes="(max-width: 1024px) 45vw, 320px" />
           </div>
-          <p
-            className={`hero-badge-pop absolute top-[15%] left-0 z-3 bg-gold px-4.5 py-3.5 font-display font-black text-gold-ink shadow-[0_12px_30px_rgba(197,48,125,0.25)] ${shouldReduceMotion ? "-rotate-8" : "opacity-0"}`}
+
+          <div
+            className={`hero-sticker-1 text-stroke absolute top-[14%] left-[-2%] z-3 rounded-ui bg-purple-sticker px-5 py-3 leading-tight text-white shadow-[0_16px_30px_rgba(120,0,60,0.3)] ${shouldReduceMotion ? "rotate-[-7deg]" : "opacity-0"}`}
           >
-            <span className="block md:text-2xl text-xl leading-none">TOP 0.47%</span>
-            <span className="mt-0.5 block text-2xs font-bold">TGAT ระดับประเทศ</span>
-          </p>
+            <b className="font-display block text-xl font-extrabold">พี่วิน &amp; พี่เกด</b>
+            <small className="text-sm font-semibold">สอนเอง ดูแลเอง ทุกคน</small>
+          </div>
+          <div
+            className={`hero-sticker-2 text-stroke absolute right-[-1%] bottom-[9%] z-3 rounded-ui bg-gold px-4.5 py-2.25 font-display text-base font-bold text-ink shadow-[0_16px_30px_rgba(120,0,60,0.3)] ${shouldReduceMotion ? "rotate-[6deg]" : "opacity-0"}`}
+          >
+            TGAT · A-Level
+          </div>
+
+          <IconSpark
+            className={`hero-spark-1 absolute max-sm:hidden top-[-8%] left-[40%] z-3 w-[17%] text-purple-deep drop-shadow-[0_8px_10px_rgba(120,0,60,0.25)] ${shouldReduceMotion ? "rotate-10" : "opacity-0"}`}
+          />
+          <IconSpark className={`hero-spark-2 absolute top-[46%] right-[-2%] z-3 w-[9%] text-gold ${shouldReduceMotion ? "" : "opacity-0"}`} />
+          <IconSpark className={`hero-spark-3 absolute bottom-[3%] left-[36%] z-3 w-[7%] text-brand-deep ${shouldReduceMotion ? "rotate-12" : "opacity-0"}`} />
         </div>
       </div>
     </section>

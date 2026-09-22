@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Noto_Sans_Thai, Prompt } from "next/font/google";
+import { Noto_Sans_Thai } from "next/font/google";
+import localFont from "next/font/local";
 
 // import { SpeedInsights } from "@vercel/speed-insights/next";
 // import { Analytics } from "@vercel/analytics/next";
+import { Button } from "@/components/Button";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
-import { Ticker } from "@/components/Ticker";
 import "./globals.css";
 import { FiArrowUpRight } from "react-icons/fi";
 
@@ -14,14 +15,16 @@ const notoSansThai = Noto_Sans_Thai({
   subsets: ["thai", "latin"],
 });
 
-const prompt = Prompt({
-  variable: "--font-prompt",
-  subsets: ["thai", "latin"],
-  weight: ["700", "800", "900"],
+// Client-supplied CI font — self-hosted from their own reference design, Noto Sans Thai covers any glyph the subset misses.
+const fcFriday = localFont({
+  src: "../public/fonts/fc-friday.woff",
+  variable: "--font-fc-friday",
+  weight: "100 900",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "The Progress — สอบติดไม่ใช่โชค | ติว TGAT & A-Level",
+  title: "The Progress — สอบติดไปด้วยกัน | ติว TGAT & A-Level",
   description: "The Progress - ติวสอบ TGAT A-Level คณิต อังกฤษ",
   metadataBase: new URL("https://theprogressgo.com"),
   alternates: {
@@ -39,16 +42,15 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="th" className={`${notoSansThai.variable} ${prompt.variable} h-full antialiased`}>
+    <html lang="th" className={`${notoSansThai.variable} ${fcFriday.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col overflow-x-hidden antialiased">
-        <Ticker />
         <Navbar />
         {children}
         <Footer />
 
-        <a href={"https://line.me/R/ti/p/@453qifrr"} target="_blank" rel="noreferrer" className="btn btn-line btn-sm fixed right-6 bottom-6 z-50 px-5 shadow-[0_12px_30px_rgba(0,0,0,0.25)]">
-          LINE Admin <FiArrowUpRight size={"1.25rem"} className="relative -top-px" />
-        </a>
+        <Button variant="line-solid" href="https://line.me/R/ti/p/@453qifrr" target="_blank" rel="noreferrer" size="md" className="fixed right-4 bottom-5 z-50">
+          LINE Admin <FiArrowUpRight size={"1.25rem"} />
+        </Button>
 
         {/* <SpeedInsights />
         <Analytics /> */}
