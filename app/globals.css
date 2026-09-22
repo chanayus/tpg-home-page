@@ -210,9 +210,3 @@
 @utility animate-marquee {
   animation: tp-marquee 46s linear infinite;
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
-    animation: none;
-  }
-}

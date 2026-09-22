@@ -21,11 +21,18 @@ const floats = [
 ];
 
 export function Hero() {
-  const [scope, animate] = useAnimate();
+  const [scope, animate] = useAnimate<HTMLElement>();
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
-    if (shouldReduceMotion) return;
+    if (shouldReduceMotion) {
+      scope.current?.querySelectorAll<HTMLElement | SVGElement>(".hero-text > *, .hero-photo-win, .hero-photo-ked, .hero-sticker-1, .hero-sticker-2, .hero-spark-1, .hero-spark-2, .hero-spark-3, .hero-squiggle path").forEach((el) => {
+        el.style.opacity = "";
+        el.style.transform = "";
+        el.style.strokeDashoffset = "";
+      });
+      return;
+    }
     const sequence: AnimationSequence = [
       [".hero-squiggle path", { strokeDashoffset: [1, 0] }, { at: 0, duration: 0.75, ease: "easeInOut" }],
       [".hero-text > *", { opacity: [0, 1], y: [24, 0] }, { at: 0, duration: 0.35, ease: "easeOut", delay: stagger(0.09, { startDelay: 0.05 }) }],
