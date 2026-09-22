@@ -33,7 +33,7 @@ export function Navbar() {
     >
       <div className="container flex items-center justify-between gap-4 py-1.5">
         <Link href="/" className="block shrink-0 leading-none" aria-label="The Progress หน้าแรก">
-          <Image src={logo} alt="" className="size-14 shrink-0 object-contain" priority />
+          <Image src={logo} alt="" className="size-12 shrink-0 object-contain" priority />
         </Link>
 
         <nav aria-label="เมนูหลัก" className="hidden xl:block">

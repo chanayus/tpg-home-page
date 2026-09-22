@@ -21,7 +21,7 @@ export function Footer() {
 
       <div className="container flex relative items-center z-1 pt-8 pb-6">
         <div className="flex lg:flex-row justify-between lg:items-center flex-col gap-8 flex-1">
-          <Image src={logo} alt="" className="size-24 border-black" priority />
+          <Image src={logo} alt="" className="size-22 border-black" priority />
 
           <nav aria-label="ช่องทางติดตาม" className="flex gap-2 flex-wrap">
             {socials.map((social) => (

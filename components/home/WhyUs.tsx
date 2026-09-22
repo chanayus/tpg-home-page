@@ -129,7 +129,7 @@ export function WhyUs() {
   return (
     <section id="why" aria-labelledby="why-title" className="relative overflow-hidden py-section">
       <motion.div
-        className="pointer-events-none absolute top-8.5 right-[5%] z-0 w-[clamp(64px,9vw,120px)]"
+        className="pointer-events-none absolute md:top-8.5 top-2 right-[5%] z-0 w-[clamp(64px,9vw,120px)]"
         animate={shouldReduceMotion ? undefined : { y: [0, -8, 0], rotate: [-3, 3, -3] }}
         transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
       >

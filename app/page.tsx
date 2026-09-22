@@ -1,6 +1,7 @@
 import { AdmitMarquee } from "@/components/home/AdmitMarquee";
 import { RecommendedCourses } from "@/components/home/RecommendedCourses";
 import { CtaBanner } from "@/components/home/CtaBanner";
+import { Gallery } from "@/components/home/Gallery";
 import { Hero } from "@/components/home/Hero";
 import { Instructors } from "@/components/home/Instructors";
 import { ResultsWall } from "@/components/home/ResultsWall";
@@ -13,6 +14,7 @@ export default function Home() {
       <AdmitMarquee />
       <ResultsWall />
       <Instructors />
+      <Gallery />
       <WhyUs />
       <RecommendedCourses />
       <CtaBanner />

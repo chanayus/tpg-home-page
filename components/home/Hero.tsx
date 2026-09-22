@@ -74,7 +74,7 @@ export function Hero() {
         <div className="hero-text">
           <p className={`tracking-wide mb-3 text-white w-fit rounded ${shouldReduceMotion ? "" : "opacity-0"}`}>(ติวสอบ TGAT · A-Level คณิต · อังกฤษ)</p>
           <h1
-            className={`font-display text-[clamp(86px,8vw,140px)] text-shadow-[0_6px_0_rgba(120,0,60,0.16)]  leading-[0.82] font-medium tracking-tight text-white ${shouldReduceMotion ? "" : "opacity-0"}`}
+            className={`font-display text-[clamp(72px,8vw,140px)] text-shadow-[0_6px_0_rgba(120,0,60,0.16)]  leading-[0.82] font-medium tracking-tight text-white ${shouldReduceMotion ? "" : "opacity-0"}`}
           >
             <span className="text-stroke-lg block">สอบติด</span>
             <span className="text-stroke-lg relative mt-1.5 block w-max max-w-full">ไปด้วยกัน</span>

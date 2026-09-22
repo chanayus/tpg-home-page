@@ -13,6 +13,7 @@ const chipVariants = [
   { bg: "bg-tint-pink", text: "text-brand-deep" },
   { bg: "bg-tint-purple", text: "text-purple-deep" },
   { bg: "bg-gold/20", text: "text-gold-ink" },
+  { bg: "bg-ink-soft/20", text: "text-ink-soft" },
 ];
 
 const instructors = [
@@ -21,7 +22,13 @@ const instructors = [
     photo: tWinPhoto,
     role: "ผู้ก่อตั้ง · ติวเตอร์ TGAT",
     school: "เศรษฐศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย",
-    points: ["TGAT Top 0.47% ของประเทศ", "ผู้เขียนหนังสือ TGAT1+TGAT2 และ TGAT2+TGAT3 (Think Beyond)", "วิทยากรรับเชิญแนะแนวที่ ร.ร. เตรียมอุดมศึกษา"],
+    quote: `"เรื่องที่ยาก จะง่ายขึ้นเสมอ เพราะพี่เข้าใจน้อง"`,
+    points: [
+      `ประสบการณ์การสอนในแวดวงวิชาการมากกว่า 9 ปี`,
+      `ผู้เขียนหนังสือ TGAT1+TGAT2 และ TGAT2+TGAT3 สำนักพิมพ์ Think Beyond`,
+      `วิทยากรรับเชิญโรงเรียนชั้นนำระดับประเทศมากมาย`,
+      `เจ้าของโครงการติวฟรีเพื่อเด็กไทย "พี่มาติว"`,
+    ],
     stat: { value: "82.08", label: "คะแนน TGAT 1-3 เต็ม 100" },
     cardRotate: -1,
     photoRotate: -2,
@@ -33,7 +40,13 @@ const instructors = [
     photo: tKedPhoto,
     role: "ผู้ก่อตั้ง · ติวเตอร์ภาษาอังกฤษ",
     school: "ป.โท การสอนภาษาอังกฤษ ธรรมศาสตร์",
-    points: ["B.A. in English เกียรตินิยมอันดับ 1", "ผู้เขียนหนังสือ Best Seller “900 คลังศัพท์คัดพิเศษ”", "ผู้เชี่ยวชาญวิชาภาษาอังกฤษระดับอุดมศึกษา"],
+    quote: `"ภาษาอังกฤษไม่ได้วัดว่าเรารู้กี่คำ แต่วัดว่าเราใช้สิ่งที่รู้ได้แค่ไหน"`,
+    points: [
+      `ประสบการณ์การสอนในแวดวงวิชาการมากกว่า 9 ปี`,
+      `ผู้เขียนหนังสือ Best Seller “900 คลังศัพท์คัดพิเศษ”`,
+      `วิทยากรรับเชิญโรงเรียนชั้นนำระดับประเทศมากมาย`,
+      `เจ้าของมหกรรมการศึกษา TCAS SPACE`,
+    ],
     stat: { value: "8+", label: "ปีสอนภาษาอังกฤษโดยตรง" },
     cardRotate: 1,
     photoRotate: 2,
@@ -59,7 +72,7 @@ export function Instructors() {
       <motion.div
         aria-hidden
         className="pointer-events-none absolute z-1 bottom-[-14%] max-xl:hidden"
-        style={{  left: "2%", width: "11rem", rotate: -6 }}
+        style={{ left: "2%", width: "11rem", rotate: -6 }}
         animate={shouldReduceMotion ? undefined : { y: [0, -10, 0] }}
         transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
       >
@@ -80,7 +93,7 @@ export function Instructors() {
             delay={0.25 + index * 0.2}
             transition={{ type: "spring", stiffness: 90, damping: 16 }}
             amount="some"
-            className="flex w-full items-center justify-center"
+            className="flex w-full items-center justify-center lg:items-stretch"
           >
             <article className="mx-auto flex w-full max-w-4xl border border-brand-deep/20 flex-col items-start xl:gap-8 gap-6 gap-y-8 rounded-panel bg-white lg:p-10 p-6 lg:pr-4 shadow-[0_22px_44px_rgba(255,0,126,0.14)] lg:flex-row transition-transform duration-300 ease-out hover:-translate-y-2">
               <figure
@@ -113,8 +126,8 @@ export function Instructors() {
                   {inst.points.map((point, i) => {
                     const variant = chipVariants[i % chipVariants.length];
                     return (
-                      <li key={point} className={`flex items-center gap-1.5 rounded-ui px-3 py-1.5 text-sm leading-snug font-medium ${variant.bg} ${variant.text}`}>
-                        <HiCheckBadge className="size-4 shrink-0" />
+                      <li key={point} className={`flex gap-1.5 rounded-ui px-3 py-1.5 text-sm leading-snug font-medium ${variant.bg} ${variant.text}`}>
+                        <HiCheckBadge className="size-4 shrink-0 mt-0.5" />
                         {point}
                       </li>
                     );
