@@ -8,11 +8,11 @@ import { HiBars3, HiXMark } from "react-icons/hi2";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 const navLinks = [
-  { name: "รู้จักเรา", href: "#team" },
-  { name: "คอร์สเรียน/ข้อสอบ", href: "#courses" },
+  { name: "รู้จักเรา", href: "#" },
+  { name: "สมัครคอร์สเรียน", href: "#" },
   { name: "คลังข้อสอบฟรี", href: "#" },
   { name: "บทความน่าอ่าน", href: "#" },
-  { name: "ความสำเร็จลูกศิษย์", href: "#results" },
+  { name: "ความสำเร็จลูกศิษย์", href: "#" },
   { name: "TPG Community", href: "#" },
   { name: "TPG TCAS DUO!", href: "#" },
 ];
