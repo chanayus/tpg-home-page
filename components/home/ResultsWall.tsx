@@ -110,8 +110,8 @@ const STICKER_DURATION = 0.18;
 
 const stickers = [
   { src: readingAreaSticker, alt: "สติกเกอร์การ์ตูน GO ลุยข้อสอบ", top: "12%", side: "left" as const, width: 168, rotate: 10, start: 0.1 },
-  { src: passExamSticker, alt: "สติกเกอร์คนนี้สอบติด", top: "42%", side: "right" as const, width: 190, rotate: -16, start: 0.42 },
-  { src: thumbsUpSticker, alt: "สติกเกอร์นิ้วโป้งให้กำลังใจ", top: "78%", side: "left" as const, width: 150, rotate: 12, start: 0.72 },
+  { src: passExamSticker, alt: "สติกเกอร์คนนี้สอบติด", top: "42%", side: "right" as const, width: 160, rotate: -16, start: 0.42 },
+  { src: thumbsUpSticker, alt: "สติกเกอร์นิ้วโป้งให้กำลังใจ", top: "70%", side: "left" as const, width: 150, rotate: 12, start: 0.72 },
 ];
 
 type Sticker = (typeof stickers)[number];

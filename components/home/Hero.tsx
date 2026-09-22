@@ -58,7 +58,7 @@ export function Hero() {
   return (
     <section
       ref={scope}
-      className="relative z-2 overflow-hidden min-h-screen lg:pt-48 pt-32 pb-32 text-white"
+      className="relative z-2 overflow-hidden min-h-screen 2xl:pt-48 pt-32 pb-32 text-white"
       style={{
         background: "radial-gradient(46% 60% at 100% 0%, #ffd2ea 0%, rgba(255,210,234,0) 70%), linear-gradient(255deg, #ff8cc6 0%, #ff2d97 26%, #e8006f 54%, #d1006a 100%)",
       }}
@@ -74,17 +74,18 @@ export function Hero() {
         <div className="hero-text">
           <p className={`tracking-wide mb-3 text-white w-fit rounded ${shouldReduceMotion ? "" : "opacity-0"}`}>(ติวสอบ TGAT · A-Level คณิต · อังกฤษ)</p>
           <h1
-            className={`font-display text-[clamp(86px,10.5vw,140px)] text-shadow-[0_6px_0_rgba(120,0,60,0.16)]  leading-[0.82] font-medium tracking-tight text-white ${shouldReduceMotion ? "" : "opacity-0"}`}
+            className={`font-display text-[clamp(86px,8vw,140px)] text-shadow-[0_6px_0_rgba(120,0,60,0.16)]  leading-[0.82] font-medium tracking-tight text-white ${shouldReduceMotion ? "" : "opacity-0"}`}
           >
             <span className="text-stroke-lg block">สอบติด</span>
             <span className="text-stroke-lg relative mt-1.5 block w-max max-w-full">ไปด้วยกัน</span>
           </h1>
-          <p className={`mt-7.5 max-w-96 text-balance text-lg leading-relaxed text-white/80 ${shouldReduceMotion ? "" : "opacity-0"}`}>
-            <strong className="font-bold">The Progress เป็นมากกว่ากวดวิชา แต่เป็นพี่ร่วมทาง</strong>
+
+          <p className={`mt-7 max-w-100 text-balance text-lg leading-relaxed bg-white text-brand w-fit px-2 rounded ${shouldReduceMotion ? "" : "opacity-0"}`}>"The Progress เป็นมากกว่ากวดวิชา แต่เป็นพี่ร่วมทาง"</p>
+          <p className={`mt-3.5 max-w-100 text-balance text-lg leading-relaxed text-white/80 ${shouldReduceMotion ? "" : "opacity-0"}`}>
             ที่ดูแลน้อง ๆ อย่างใกล้ชิดด้วยตัวเอง ผ่านระบบการเรียนแบบใหม่ และเข้าใจในทุกช่วงของการเติบโต เดินเคียงข้างไปด้วยกัน จนถึงวันที่น้องสอบติด^^
           </p>
 
-          <div className={`mt-6.5 flex flex-wrap gap-3 ${shouldReduceMotion ? "" : "opacity-0"}`}>
+          <div className={`mt-7 flex flex-wrap gap-3 ${shouldReduceMotion ? "" : "opacity-0"}`}>
             <Button variant="white" size="lg" href="#courses">
               ดูคอร์สทั้งหมด
             </Button>
@@ -129,9 +130,9 @@ export function Hero() {
           </div>
 
           <IconSpark
-            className={`hero-spark-1 absolute max-sm:hidden top-[-8%] left-[40%] z-3 w-[17%] text-purple-deep drop-shadow-[0_8px_10px_rgba(120,0,60,0.25)] ${shouldReduceMotion ? "rotate-10" : "opacity-0"}`}
+            className={`hero-spark-1 absolute max-sm:hidden top-[-8%] left-[40%] z-3 w-[17%] text-gold drop-shadow-[0_8px_10px_rgba(120,0,60,0.25)] ${shouldReduceMotion ? "rotate-10" : "opacity-0"}`}
           />
-          <IconSpark className={`hero-spark-2 absolute top-[46%] right-[-2%] z-3 w-[9%] text-gold ${shouldReduceMotion ? "" : "opacity-0"}`} />
+          <IconSpark className={`hero-spark-2 absolute top-[46%] right-[-2%] z-3 w-[9%] text-purple-sticker ${shouldReduceMotion ? "" : "opacity-0"}`} />
           <IconSpark className={`hero-spark-3 absolute bottom-[3%] left-[36%] z-3 w-[7%] text-brand-deep ${shouldReduceMotion ? "rotate-12" : "opacity-0"}`} />
         </div>
       </div>

@@ -82,9 +82,25 @@
 }
 
 @utility container {
+  padding-inline: 1.25rem;
   margin-inline: auto;
   max-width: 1360px;
-  padding-inline: 1.25rem;
+
+  @variant max-2xl {
+    max-width: 1220px;
+  }
+
+  @variant max-xl {
+    max-width: 1025px;
+  }
+
+  @variant max-lg {
+    padding-inline: 2rem;
+  }
+
+  @variant max-md {
+    padding-inline: 1.25rem;
+  }
 }
 
 /* Only one usable weight in the licensed font — headings fake their boldness with a hairline stroke, matching the client's own CI trick. */
