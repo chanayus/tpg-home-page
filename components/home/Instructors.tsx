@@ -38,10 +38,7 @@ const instructors = [
 
 function InstructorPhoto({ photo, rotate, className }: { photo: StaticImageData; rotate: number; className?: string }) {
   return (
-    <figure
-      style={{ rotate: `${rotate}deg` }}
-      className={cn("shadow-[0_18px_34px_rgba(120,0,60,0.22)] relative bg-white overflow-hidden rounded-md shrink-0 p-1.5", className)}
-    >
+    <figure style={{ rotate: `${rotate}deg` }} className={cn("shadow-[0_18px_34px_rgba(120,0,60,0.22)] relative bg-white overflow-hidden rounded-md shrink-0 p-1.5", className)}>
       <div className="bg-grad-photo rounded">
         <Image src={photo} alt="" className="block size-full object-cover object-top" sizes="(max-width: 640px) 200px, 280px" />
       </div>
@@ -101,10 +98,10 @@ export function Instructors() {
                     <h3 className="relative font-display sm:text-5xl text-4xl font-extrabold whitespace-nowrap text-ink">{inst.name}</h3>
                     <p className="inline-block rounded-ui bg-brand-deep text-white px-3 py-0.5 sm:text-base text-sm font-bold">{inst.role}</p>
                     <p className="text-sm text-ink-soft">{inst.school}</p>
-                    <p className="text-2xl">{inst.quote}</p>
                   </div>
                 </header>
 
+                <p className="md:text-2xl text-xl max-md:text-center">{inst.quote}</p>
                 <ul className="flex flex-col gap-2 ">
                   {inst.points.map((point, i) => (
                     <li key={point} className={`flex gap-1.5 rounded-ui px-3 py-1.5 text-sm leading-snug font-medium bg-tint-pink text-brand-deep`}>
