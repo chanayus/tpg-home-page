@@ -1,13 +1,13 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/Button";
-import logo from "@/public/images/logo-white.webp";
+import { Button } from "./Button";
+import logo from "../public/images/logo-white.webp";
 import { useEffect, useId, useState } from "react";
 import { HiBars3, HiXMark } from "react-icons/hi2";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/cn";
+import { cn } from "../lib/cn";
 
 const navLinks = [
   { name: "รู้จักเรา", href: "#" },

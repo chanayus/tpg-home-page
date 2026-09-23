@@ -5,8 +5,8 @@ import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { HiHeart, HiPlus, HiUserGroup, HiUserPlus } from "react-icons/hi2";
 import type { IconType } from "react-icons";
-import cardDreamUniversitySticker from "@/public/images/stickers/card-dream-university.webp";
-import { cn } from "@/lib/cn";
+import cardDreamUniversitySticker from "../../public/images/stickers/card-dream-university.webp";
+import { cn } from "../../lib/cn";
 import { Reveal } from "../Reveal";
 
 const whyTabs = ["care", "near", "together"] as const;

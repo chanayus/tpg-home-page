@@ -4,11 +4,11 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useScroll, useTransform, type MotionStyle, type MotionValue } from "motion/react";
 import { IoClose } from "react-icons/io5";
-import { cn } from "@/lib/cn";
+import { cn } from "../../lib/cn";
 import { Reveal } from "../Reveal";
-import readingAreaSticker from "@/public/images/stickers/reading-area.webp";
-import passExamSticker from "@/public/images/stickers/badge-pass-exam.webp";
-import thumbsUpSticker from "@/public/images/stickers/thumbs-up.webp";
+import readingAreaSticker from "../../public/images/stickers/reading-area.webp";
+import passExamSticker from "../../public/images/stickers/badge-pass-exam.webp";
+import thumbsUpSticker from "../../public/images/stickers/thumbs-up.webp";
 // import { doc, onSnapshot } from 'firebase/firestore';
 // import { firestore } from '../utils/firebaseClient';
 

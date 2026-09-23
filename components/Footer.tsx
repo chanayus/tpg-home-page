@@ -1,4 +1,4 @@
-import logo from "@/public/images/logo-white.webp";
+import logo from "../public/images/logo-white.webp";
 import Image from "next/image";
 import { Button } from "./Button";
 

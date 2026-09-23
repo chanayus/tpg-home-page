@@ -1,4 +1,4 @@
-import { Button } from "@/components/Button";
+import { Button } from "../Button";
 import { Reveal } from "../Reveal";
 import { SquiggleReveal } from "../SquiggleReveal";
 import { IconSpark, IconSquiggle } from "./SvgProps";

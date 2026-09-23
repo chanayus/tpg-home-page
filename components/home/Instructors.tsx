@@ -3,11 +3,11 @@
 import Image, { type StaticImageData } from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { HiCheckBadge } from "react-icons/hi2";
-import studentBoyArt from "@/public/images/student-boy-art.png";
-import studentGirlArt from "@/public/images/student-girl-art.png";
-import tKedPhoto from "@/public/images/t-ked.webp";
-import tWinPhoto from "@/public/images/t-win.webp";
-import { cn } from "@/lib/cn";
+import studentBoyArt from "../../public/images/student-boy-art.png";
+import studentGirlArt from "../../public/images/student-girl-art.png";
+import tKedPhoto from "../../public/images/t-ked.webp";
+import tWinPhoto from "../../public/images/t-win.webp";
+import { cn } from "../../lib/cn";
 import { Reveal } from "../Reveal";
 
 const instructors = [

@@ -1,11 +1,11 @@
-import { StudentSuccess } from "@/components/home/StudentSuccess";
-import { RecommendedCourses } from "@/components/home/RecommendedCourses";
-import { CtaBanner } from "@/components/home/CtaBanner";
-import { Gallery } from "@/components/home/Gallery";
-import { Hero } from "@/components/home/Hero";
-import { Instructors } from "@/components/home/Instructors";
-import { StudentComments } from "@/components/home/StudentComments";
-import { WhyUs } from "@/components/home/WhyUs";
+import { StudentSuccess } from "../components/home/StudentSuccess";
+import { RecommendedCourses } from "../components/home/RecommendedCourses";
+import { CtaBanner } from "../components/home/CtaBanner";
+import { Gallery } from "../components/home/Gallery";
+import { Hero } from "../components/home/Hero";
+import { Instructors } from "../components/home/Instructors";
+import { StudentComments } from "../components/home/StudentComments";
+import { WhyUs } from "../components/home/WhyUs";
 
 export default function Home() {
   return (

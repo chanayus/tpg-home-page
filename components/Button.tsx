@@ -1,6 +1,6 @@
 import Link, { type LinkProps } from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
-import { cn } from "@/lib/cn";
+import { cn } from "../lib/cn";
 
 type Variant = "solid" | "white" | "glass" | "line" | "line-solid" | "nav";
 type Size = "sm" | "md" | "lg";

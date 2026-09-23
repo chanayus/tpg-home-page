@@ -4,9 +4,9 @@ import localFont from "next/font/local";
 
 // import { SpeedInsights } from "@vercel/speed-insights/next";
 // import { Analytics } from "@vercel/analytics/next";
-import { Button } from "@/components/Button";
-import { Footer } from "@/components/Footer";
-import { Navbar } from "@/components/Navbar";
+import { Button } from "../components/Button";
+import { Footer } from "../components/Footer";
+import { Navbar } from "../components/Navbar";
 import "./globals.css";
 import { FiArrowUpRight } from "react-icons/fi";
 

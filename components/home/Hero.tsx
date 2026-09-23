@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import Image from "next/image";
 import { useAnimate, useReducedMotion, stagger, type AnimationPlaybackControls, type AnimationSequence, type DOMKeyframesDefinition, type AnimationOptions } from "motion/react";
 
-import { Button } from "@/components/Button";
-import tKedPhoto from "@/public/images/t-ked.webp";
-import tWinPhoto from "@/public/images/t-win.webp";
+import { Button } from "../Button";
+import tKedPhoto from "../../public/images/t-ked.webp";
+import tWinPhoto from "../../public/images/t-win.webp";
 import { IconSpark, IconSquiggle } from "./SvgProps";
 
 const tilt = { win: -5, ked: 4, sticker: -7, sticker2: 6, spark1: 10, spark2: 0, spark3: 12 };
