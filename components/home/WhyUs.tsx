@@ -6,6 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { HiHeart, HiPlus, HiUserGroup, HiUserPlus } from "react-icons/hi2";
 import type { IconType } from "react-icons";
 import cardDreamUniversitySticker from "@/public/images/stickers/card-dream-university.webp";
+import { cn } from "@/lib/cn";
 import { Reveal } from "../Reveal";
 
 const whyTabs = ["care", "near", "together"] as const;
@@ -79,15 +80,18 @@ function TabPanel({ id }: { id: WhyTabId }) {
         return (
           <div
             key={item.title}
-            className={`overflow-hidden rounded-ui shadow-[0_12px_26px_rgba(255,0,126,0.1),inset_0_0_0_1px_var(--hair)] transition-colors ${open ? "bg-blush border border-brand shadow-[0_18px_36px_rgba(255,0,126,0.18)]" : "bg-white"}`}
+            className={cn(
+              "overflow-hidden rounded-ui shadow-[0_12px_26px_rgba(255,0,126,0.1),inset_0_0_0_1px_var(--hair)] transition-colors",
+              open ? "bg-blush border border-brand shadow-[0_18px_36px_rgba(255,0,126,0.18)]" : "bg-white",
+            )}
           >
             <button type="button" aria-expanded={open} onClick={() => setOpenIndex(open ? -1 : index)} className="flex w-full items-center justify-between gap-4 px-6.5 py-5 text-left">
               <span>
                 <b className="font-display block text-xl font-bold">{item.title}</b>
                 <span className="mt-0.5 block text-sm text-ink-soft">{item.desc}</span>
               </span>
-              <span className={`grid size-10 shrink-0 place-items-center rounded-ui transition-colors ${open ? "bg-grad-pink text-white" : "bg-tint-pink text-brand-deep"}`}>
-                <HiPlus className={`size-5 transition-transform duration-200 ${open ? "rotate-45" : ""}`} />
+              <span className={cn("grid size-10 shrink-0 place-items-center rounded-ui transition-colors", open ? "bg-grad-pink text-white" : "bg-tint-pink text-brand-deep")}>
+                <HiPlus className={cn("size-5 transition-transform duration-200", open && "rotate-45")} />
               </span>
             </button>
             <AnimatePresence initial={false}>
@@ -158,14 +162,15 @@ export function WhyUs() {
                   tabIndex={active ? 0 : -1}
                   onClick={() => setTab(id)}
                   onKeyDown={(e) => onTabKeyDown(e, index)}
-                  className={`text-stroke flex items-center gap-3.5 rounded-ui py-3.5 pr-5.5 pl-3.5 text-left shadow-[0_12px_26px_rgba(255,0,126,0.12),inset_0_0_0_1px_var(--hair)] transition-all hover:scale-97 hover:bg-blush ${
-                    active ? "bg-grad-pink text-white shadow-[0_16px_32px_rgba(255,0,126,0.34)] hover:scale-97" : "bg-white text-brand"
-                  }`}
+                  className={cn(
+                    "text-stroke flex items-center gap-3.5 rounded-ui py-3.5 pr-5.5 pl-3.5 text-left shadow-[0_12px_26px_rgba(255,0,126,0.12),inset_0_0_0_1px_var(--hair)] transition-all hover:scale-97 hover:bg-blush",
+                    active ? "bg-grad-pink text-white shadow-[0_16px_32px_rgba(255,0,126,0.34)] hover:scale-97" : "bg-white text-brand",
+                  )}
                 >
                   <Icon className="lg:size-10 size-8 shrink-0" />
                   <span>
-                    <b className={`font-display block text-2xl font-extrabold ${active ? "text-white" : "text-brand-deep"}`}>{pillar.label}</b>
-                    <span className={`block text-sm ${active ? "text-white" : "text-ink-soft"}`}>{pillar.sub}</span>
+                    <b className={cn("font-display block text-2xl font-extrabold", active ? "text-white" : "text-brand-deep")}>{pillar.label}</b>
+                    <span className={cn("block text-sm", active ? "text-white" : "text-ink-soft")}>{pillar.sub}</span>
                   </span>
                 </button>
               );

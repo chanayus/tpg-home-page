@@ -1,12 +1,13 @@
 "use client";
 
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { HiCheckBadge } from "react-icons/hi2";
 import studentBoyArt from "@/public/images/student-boy-art.png";
 import studentGirlArt from "@/public/images/student-girl-art.png";
 import tKedPhoto from "@/public/images/t-ked.webp";
 import tWinPhoto from "@/public/images/t-win.webp";
+import { cn } from "@/lib/cn";
 import { Reveal } from "../Reveal";
 
 const instructors = [
@@ -36,6 +37,19 @@ const instructors = [
     photoRotate: 2,
   },
 ];
+
+function InstructorPhoto({ photo, rotate, className }: { photo: StaticImageData; rotate: number; className?: string }) {
+  return (
+    <figure
+      style={{ rotate: `${rotate}deg` }}
+      className={cn("shadow-[0_18px_34px_rgba(120,0,60,0.22)] relative bg-white overflow-hidden rounded-md shrink-0 p-1.5", className)}
+    >
+      <div className="bg-grad-photo rounded">
+        <Image src={photo} alt="" className="block size-full object-cover object-top" sizes="(max-width: 640px) 200px, 280px" />
+      </div>
+    </figure>
+  );
+}
 
 export function Instructors() {
   const shouldReduceMotion = useReducedMotion();
@@ -79,26 +93,12 @@ export function Instructors() {
           >
             <article className="mx-auto flex w-full max-w-4xl border border-brand-deep/20 flex-col items-start xl:gap-8 gap-6 gap-y-8 rounded-panel bg-white lg:p-10 p-6 lg:pr-4 shadow-[0_22px_44px_rgba(255,0,126,0.14)] lg:flex-row transition-transform duration-300 ease-out hover:-translate-y-2">
               {/* inst for image desktop */}
-              <figure
-                style={{ rotate: `${inst.photoRotate}deg` }}
-                className="shadow-[0_18px_34px_rgba(120,0,60,0.22)] relative bg-white overflow-hidden rounded-md xl:w-40 w-32 max-lg:hidden shrink-0 p-1.5"
-              >
-                <div style={{ background: "linear-gradient(165deg, #fff0f8, #ffb5d9)" }} className="rounded bg-white">
-                  <Image src={inst.photo} alt="" className="block size-full object-cover object-top" sizes="(max-width: 640px) 200px, 280px" />
-                </div>
-              </figure>
+              <InstructorPhoto photo={inst.photo} rotate={inst.photoRotate} className="xl:w-40 w-32 max-lg:hidden" />
 
               <div className="flex-1 space-y-6 text-left w-full">
                 <header className="gap-x-6 flex">
                   {/* inst for image mobile */}
-                  <figure
-                    style={{ rotate: `${inst.photoRotate}deg` }}
-                    className="shadow-[0_18px_34px_rgba(120,0,60,0.22)] h-fit relative bg-white overflow-hidden rounded-md sm:w-32 w-27 lg:hidden shrink-0 p-1.5"
-                  >
-                    <div style={{ background: "linear-gradient(165deg, #fff0f8, #ffb5d9)" }} className="rounded bg-white">
-                      <Image src={inst.photo} alt="" className="block size-full object-cover object-top" sizes="(max-width: 640px) 200px, 280px" />
-                    </div>
-                  </figure>
+                  <InstructorPhoto photo={inst.photo} rotate={inst.photoRotate} className="h-fit sm:w-32 w-27 lg:hidden" />
                   <div className="space-y-4">
                     <h3 className="relative font-display sm:text-5xl text-4xl font-extrabold whitespace-nowrap text-ink">{inst.name}</h3>
                     <p className="inline-block rounded-ui bg-brand-deep text-white px-3 py-0.5 sm:text-base text-sm font-bold">{inst.role}</p>

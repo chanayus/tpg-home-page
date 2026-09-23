@@ -20,6 +20,7 @@
   --hair: rgba(255, 0, 126, 0.14);
   --line-green: #06c755;
   --grad-pink: linear-gradient(135deg, #ff2d97 0%, #ff007e 55%, #e0006f 100%);
+  --grad-photo: linear-gradient(165deg, #fff0f8, #ffb5d9);
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url%28%23n%29'/%3E%3C/svg%3E");
   --spark-pink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff007e' d='M12 0c.9 7.4 4.6 11.1 12 12-7.4.9-11.1 4.6-12 12-.9-7.4-4.6-11.1-12-12C7.4 11.1 11.1 7.4 12 0z'/%3E%3C/svg%3E");
   --spark-soft: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff007e' fill-opacity='.16' d='M12 0c.9 7.4 4.6 11.1 12 12-7.4.9-11.1 4.6-12 12-.9-7.4-4.6-11.1-12-12C7.4 11.1 11.1 7.4 12 0z'/%3E%3C/svg%3E");
@@ -153,6 +154,10 @@
 
 @utility bg-grad-pink {
   background: var(--grad-pink);
+}
+
+@utility bg-grad-photo {
+  background: var(--grad-photo);
 }
 
 @utility grid-tint-bg {

@@ -4,10 +4,13 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useMotionValue, useReducedMotion, useScroll, useTransform, type MotionStyle, type MotionValue } from "motion/react";
 import { IoClose } from "react-icons/io5";
+import { cn } from "@/lib/cn";
 import { Reveal } from "../Reveal";
 import readingAreaSticker from "@/public/images/stickers/reading-area.webp";
 import passExamSticker from "@/public/images/stickers/badge-pass-exam.webp";
 import thumbsUpSticker from "@/public/images/stickers/thumbs-up.webp";
+// import { doc, onSnapshot } from 'firebase/firestore';
+// import { firestore } from '../utils/firebaseClient';
 
 /* ---------- shared: ใช้ร่วมกันทั้งเวอร์ชัน desktop และ mobile ---------- */
 
@@ -15,40 +18,19 @@ const reviewBgCard = ["bg-tint-pink", "bg-tint-purple", "bg-tint-yellow"];
 
 // ตำแหน่งการวางและหมุนของ review card แต่่ละอัน
 const scatterSpots = [
-  { top: "-2%", left: "4%", rotate: -6, ratio: "3/4", variant: 0 },
+  { top: "-2%", left: "4%", rotate: -4, ratio: "3/4", variant: 0 },
   { top: "38%", left: "84%", rotate: 5, ratio: "1/1", variant: 2 },
   { top: "8%", left: "40%", rotate: -3, ratio: "1/1", variant: 1 },
   { top: "32%", left: "12%", rotate: -4, ratio: "4/5", variant: 2 },
   { top: "2%", left: "80%", rotate: 5, ratio: "3/4", variant: 0 },
   { top: "32%", left: "40%", rotate: 6, ratio: "3/4", variant: 1 },
-  { top: "70%", left: "4%", rotate: 8, ratio: "1/1", variant: 2 },
+  { top: "70%", left: "4%", rotate: 6, ratio: "1/1", variant: 2 },
   { top: "56%", left: "74%", rotate: -3, ratio: "4/5", variant: 0 },
-  { top: "70%", left: "36%", rotate: -6, ratio: "3/4", variant: 1 },
+  { top: "70%", left: "36%", rotate: -5, ratio: "3/4", variant: 1 },
   { top: "85%", left: "82%", rotate: 5, ratio: "1/1", variant: 2 },
 ];
 
-// ข้อมูลรูปภาพ (mockup)
-const reviewImages = [
-  ...Array(10)
-    .keys()
-    .map((i) => "/images/comment.jpg"),
-];
-
-// นำข้อมูล รูป กับ ตำแหน่ง มารวมกันเพื่อเอาไปใช้ render
-const reviews = scatterSpots.map((spot, i) => ({
-  ...spot,
-  badge: String(i + 1).padStart(2, "0"),
-  bg: reviewBgCard[spot.variant],
-  image: reviewImages[i],
-}));
-
-type Review = (typeof reviews)[number];
-
-const REVIEW_START = 0.05;
-const REVIEW_END = 0.95;
-const REVIEW_DURATION = ((REVIEW_END - REVIEW_START) / reviews.length) * 2.2;
-const REVIEW_STAGGER = (REVIEW_END - REVIEW_START - REVIEW_DURATION) / (reviews.length - 1);
-const REVIEW_RISE = 160;
+type Review = (typeof scatterSpots)[number] & { badge: string; bg: string; image: string };
 
 function getReviewLayoutId(badge: string) {
   return `review-photo-${badge}`;
@@ -71,6 +53,12 @@ function ReviewCard({
   isActive?: boolean;
   onSelect?: (review: Review) => void;
 }) {
+  const REVIEW_START = 0.05;
+  const REVIEW_END = 0.95;
+  const REVIEW_DURATION = ((REVIEW_END - REVIEW_START) / scatterSpots.length) * 2.2;
+  const REVIEW_STAGGER = (REVIEW_END - REVIEW_START - REVIEW_DURATION) / (scatterSpots.length - 1);
+  const REVIEW_RISE = 160;
+
   const start = REVIEW_START + index * REVIEW_STAGGER;
   const end = start + REVIEW_DURATION;
   const y = useTransform(progress, [start, end], [REVIEW_RISE, 0]);
@@ -78,7 +66,7 @@ function ReviewCard({
   return (
     <motion.figure
       style={{ ...style, aspectRatio: review.ratio, rotate: review.rotate, y }}
-      className={`grid place-items-center rounded-xl p-2 text-center text-base leading-normal font-medium ${review.bg} ${className ?? ""}`}
+      className={cn("grid place-items-center rounded-xl p-2 text-center text-base leading-normal font-medium", review.bg, className)}
     >
       {onSelect ? (
         <button
@@ -127,7 +115,7 @@ function StickerCharm({ sticker, progress }: { sticker: Sticker; progress: Motio
   );
 }
 
-function PinnedResultsWall({ selectedBadge, onSelect }: { selectedBadge: string | null; onSelect: (review: Review) => void }) {
+function PinnedStudentComments({ data, selectedBadge, onSelect }: { data: Review[]; selectedBadge: string | null; onSelect: (review: Review) => void }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: rawProgress } = useScroll({ target: trackRef, offset: ["start start", "end end"] });
 
@@ -144,7 +132,7 @@ function PinnedResultsWall({ selectedBadge, onSelect }: { selectedBadge: string 
         </div>
 
         <motion.ul style={{ y: containerY }} className="absolute h-screen inset-y-0 left-1/2 z-2 w-full max-w-5xl -translate-x-1/2">
-          {reviews.map((review, i) => (
+          {data.map((review, i) => (
             <ReviewCard
               key={review.badge}
               review={review}
@@ -213,7 +201,7 @@ function ImageModal({ review, onClose }: { review: Review; onClose: () => void }
 
 /* ---------- mobile: static grid wall (also the fallback under prefers-reduced-motion) ---------- */
 
-function StaticResultsWall() {
+function StaticStudentComments({ data }: { data: Review[] }) {
   const settledProgress = useMotionValue(1);
 
   return (
@@ -231,7 +219,7 @@ function StaticResultsWall() {
           amount="some"
           className="mt-9 grid grid-cols-[repeat(auto-fill,minmax(min(100%,150px),1fr))] gap-4"
         >
-          {reviews.map((review, i) => (
+          {data.map((review, i) => (
             <li key={review.badge}>
               <ReviewCard review={review} index={i} progress={settledProgress} />
             </li>
@@ -260,14 +248,51 @@ function getIsDesktopServerSnapshot() {
   return false;
 }
 
-export function ResultsWall() {
+export function StudentComments() {
   const isDesktop = useSyncExternalStore(subscribeIsDesktop, getIsDesktopSnapshot, getIsDesktopServerSnapshot);
   const shouldReduceMotion = useReducedMotion();
   const [selectedReview, setSelectedReview] = useState<Review | null>(null);
 
+  const [commentImages, setCommentImages] = useState<string[] | null>(null);
+
+  // useEffect(() => {
+  //   const d = doc(firestore, "settings", "home");
+  //   const unsub = onSnapshot(
+  //     d,
+  //     (snap) => {
+  //       const data = snap.data() as { commentImages?: string[] } | undefined;
+  //       const arr = data?.commentImages || [];
+  //       setCommentImages(arr.length > 0 ? arr : null);
+  //     },
+  //     () => setCommentImages(null),
+  //   );
+  //   return () => unsub();
+  // }, []);
+
+  // ข้อมูลรูปภาพ (mockup)
+  const mockupData = [
+    ...Array(10)
+      .keys()
+      .map((i) => "/images/comment.jpg"),
+  ];
+
+  const images = commentImages ?? mockupData;
+
+  if (images.length === 0) return null;
+
+  const data = scatterSpots.map((spot, i) => ({
+    ...spot,
+    badge: String(i + 1).padStart(2, "0"),
+    bg: reviewBgCard[spot.variant],
+    image: mockupData[i],
+  }));
+
+  console.log(data);
+  
+
   return (
     <>
-      {isDesktop && !shouldReduceMotion ? <PinnedResultsWall selectedBadge={selectedReview?.badge ?? null} onSelect={setSelectedReview} /> : <StaticResultsWall />}
+      {isDesktop && !shouldReduceMotion ? <PinnedStudentComments selectedBadge={selectedReview?.badge ?? null} onSelect={setSelectedReview} data={data} /> : <StaticStudentComments data={data} />}
       <AnimatePresence>{selectedReview && <ImageModal review={selectedReview} onClose={() => setSelectedReview(null)} />}</AnimatePresence>
     </>
   );

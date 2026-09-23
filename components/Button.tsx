@@ -1,26 +1,22 @@
 import Link, { type LinkProps } from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
+import { cn } from "@/lib/cn";
 
 type Variant = "solid" | "white" | "glass" | "line" | "line-solid" | "nav";
 type Size = "sm" | "md" | "lg";
 
-const BASE =
-  // base style
-  "btn flex items-center justify-center gap-2 rounded-ui font-bold whitespace-nowrap text-stroke" +
-  // transition
-  "transition-all duration-200 ease-out" +
-  // variable
-  "[--btn-shadow:color-mix(in_oklab,var(--brand)_45%,transparent)] " +
-  // hover
-  "" +
-  // active
-  "active:translate-y-0 active:shadow-[0_4px_10px_-2px_var(--btn-shadow)] ";
+const BASE = [
+  "btn flex items-center justify-center gap-2 rounded-ui font-bold whitespace-nowrap text-stroke",
+  "transition-all duration-200 ease-out",
+  "[--btn-shadow:color-mix(in_oklab,var(--brand)_45%,transparent)]",
+  "active:translate-y-0 active:shadow-[0_4px_10px_-2px_var(--btn-shadow)]",
+];
 
 const VARIANT_CLASS: Record<Variant, string> = {
-  solid: "text-white ",
+  solid: "text-white bg-brand hover:bg-brand-hover",
   white: "bg-white text-brand-deep hover:bg-white/80 ",
   glass: "bg-white/20 text-white border border-white/20 backdrop-blur hover:bg-white/35",
-  line: "bg-tint-pink text-brand-deep border border-brand-deep/20 hover:bg-[#ffd0e7]",
+  line: "bg-tint-pink text-brand-deep border border-brand-deep/20 hover:bg-brand-deep/15",
   "line-solid": "bg-line-green text-white [--btn-shadow:color-mix(in_oklab,var(--line-green)_50%,transparent)]",
   nav: "bg-white text-brand-deep hover:bg-blush hover:translate-y-0! active:translate-y-0!",
 };
@@ -30,10 +26,6 @@ const SIZE_CLASS: Record<Size, string> = {
   md: "px-5 py-2",
   sm: "px-4 py-2 text-sm",
 };
-
-function cn(...classes: Array<string | false | undefined>) {
-  return classes.filter(Boolean).join(" ");
-}
 
 type CommonProps = {
   variant: Variant;

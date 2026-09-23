@@ -6,6 +6,8 @@ import logo from "@/public/images/logo-white.webp";
 import { useEffect, useId, useState } from "react";
 import { HiBars3, HiXMark } from "react-icons/hi2";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/cn";
 
 const navLinks = [
   { name: "รู้จักเรา", href: "#" },
@@ -18,19 +20,20 @@ const navLinks = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    if (!isHome) return;
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isHome]);
 
   return (
-    <header
-      className={`fixed w-full top-0 z-40 text-white shadow-[0_8px_24px_rgba(255,0,126,0.28)] transition-colors duration-300 ${scrolled ? "bg-brand" : "bg-transparent "}`}
-    >
+    <header className={cn("fixed w-full top-0 z-40 text-white shadow-[0_8px_24px_rgba(255,0,126,0.28)] transition-colors duration-300", isHome && !scrolled ? "bg-transparent" : "bg-brand")}>
       <div className="container flex items-center justify-between gap-4 py-1.5">
         <Link href="/" className="block shrink-0 leading-none" aria-label="The Progress หน้าแรก">
           <Image src={logo} alt="" className="size-12 shrink-0 object-contain" priority />
@@ -40,7 +43,12 @@ export function Navbar() {
           <ul className="flex flex-wrap items-center gap-0.5">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <Link href={link.href} className="text-stroke block rounded-ui px-3 py-2 text-base font-semibold whitespace-nowrap text-white transition-colors hover:bg-white/20">
+                <Link
+                  href={link.href}
+                  className={cn("text-stroke block rounded-ui px-3 py-2 text-base font-semibold whitespace-nowrap text-white transition-colors hover:bg-white/20", {
+                    "bg-white/20": link.href === pathname,
+                  })}
+                >
                   {link.name}
                 </Link>
               </li>
