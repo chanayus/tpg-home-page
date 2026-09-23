@@ -17,7 +17,7 @@ const VARIANT_CLASS: Record<Variant, string> = {
   white: "bg-white text-brand-deep hover:bg-white/80 ",
   glass: "bg-white/20 text-white border border-white/20 backdrop-blur hover:bg-white/35",
   line: "bg-tint-pink text-brand-deep border border-brand-deep/20 hover:bg-brand-deep/15",
-  "line-solid": "bg-line-green text-white [--btn-shadow:color-mix(in_oklab,var(--line-green)_50%,transparent)]",
+  "line-solid": "bg-line-green text-white hover:bg-green-600",
   nav: "bg-white text-brand-deep hover:bg-blush hover:translate-y-0! active:translate-y-0!",
 };
 
