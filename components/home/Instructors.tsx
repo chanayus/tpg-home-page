@@ -9,18 +9,11 @@ import tKedPhoto from "@/public/images/t-ked.webp";
 import tWinPhoto from "@/public/images/t-win.webp";
 import { Reveal } from "../Reveal";
 
-const chipVariants = [
-  { bg: "bg-tint-pink", text: "text-brand-deep" },
-  { bg: "bg-tint-purple", text: "text-purple-deep" },
-  { bg: "bg-gold/20", text: "text-gold-ink" },
-  { bg: "bg-ink-soft/20", text: "text-ink-soft" },
-];
-
 const instructors = [
   {
     name: "พี่วิน",
     photo: tWinPhoto,
-    role: "ผู้ก่อตั้ง · ติวเตอร์ TGAT",
+    role: "ผู้ก่อตั้ง · ผู้ดูแลวิชา TGAT2-3 และคณิตศาสตร์",
     school: "เศรษฐศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย",
     quote: `"เรื่องที่ยาก จะง่ายขึ้นเสมอ เพราะพี่เข้าใจน้อง"`,
     points: [
@@ -29,29 +22,18 @@ const instructors = [
       `วิทยากรรับเชิญโรงเรียนชั้นนำระดับประเทศมากมาย`,
       `เจ้าของโครงการติวฟรีเพื่อเด็กไทย "พี่มาติว"`,
     ],
-    stat: { value: "82.08", label: "คะแนน TGAT 1-3 เต็ม 100" },
     cardRotate: -1,
     photoRotate: -2,
-    badge: "bg-grad-pink text-white",
-    echo: "text-purple-deep/70",
   },
   {
     name: "พี่เกด",
     photo: tKedPhoto,
-    role: "ผู้ก่อตั้ง · ติวเตอร์ภาษาอังกฤษ",
+    role: "ผู้ก่อตั้ง · ผู้ดูแลวิชา TGAT 1 และภาษาอังกฤษ",
     school: "ป.โท การสอนภาษาอังกฤษ ธรรมศาสตร์",
     quote: `"ภาษาอังกฤษไม่ได้วัดว่าเรารู้กี่คำ แต่วัดว่าเราใช้สิ่งที่รู้ได้แค่ไหน"`,
-    points: [
-      `ประสบการณ์การสอนในแวดวงวิชาการมากกว่า 9 ปี`,
-      `ผู้เขียนหนังสือ Best Seller “900 คลังศัพท์คัดพิเศษ”`,
-      `วิทยากรรับเชิญโรงเรียนชั้นนำระดับประเทศมากมาย`,
-      `เจ้าของมหกรรมการศึกษา TCAS SPACE`,
-    ],
-    stat: { value: "8+", label: "ปีสอนภาษาอังกฤษโดยตรง" },
+    points: [`ประสบการณ์การสอนในแวดวงวิชาการมากกว่า 9 ปี`, `ผู้เขียนหนังสือ Best Seller “900 คลังศัพท์คัดพิเศษ”`, `วิทยากรรับเชิญโรงเรียนชั้นนำระดับประเทศมากมาย`, `เจ้าของมหกรรมการศึกษา TCAS SPACE`],
     cardRotate: 1,
     photoRotate: 2,
-    badge: "bg-purple-sticker text-white",
-    echo: "text-brand/70",
   },
 ];
 
@@ -96,6 +78,7 @@ export function Instructors() {
             className="flex w-full items-center justify-center lg:items-stretch"
           >
             <article className="mx-auto flex w-full max-w-4xl border border-brand-deep/20 flex-col items-start xl:gap-8 gap-6 gap-y-8 rounded-panel bg-white lg:p-10 p-6 lg:pr-4 shadow-[0_22px_44px_rgba(255,0,126,0.14)] lg:flex-row transition-transform duration-300 ease-out hover:-translate-y-2">
+              {/* inst for image desktop */}
               <figure
                 style={{ rotate: `${inst.photoRotate}deg` }}
                 className="shadow-[0_18px_34px_rgba(120,0,60,0.22)] relative bg-white overflow-hidden rounded-md xl:w-40 w-32 max-lg:hidden shrink-0 p-1.5"
@@ -107,9 +90,10 @@ export function Instructors() {
 
               <div className="flex-1 space-y-6 text-left w-full">
                 <header className="gap-x-6 flex">
+                  {/* inst for image mobile */}
                   <figure
                     style={{ rotate: `${inst.photoRotate}deg` }}
-                    className="shadow-[0_18px_34px_rgba(120,0,60,0.22)] relative bg-white overflow-hidden rounded-md sm:w-32 w-27 lg:hidden shrink-0 p-1.5"
+                    className="shadow-[0_18px_34px_rgba(120,0,60,0.22)] h-fit relative bg-white overflow-hidden rounded-md sm:w-32 w-27 lg:hidden shrink-0 p-1.5"
                   >
                     <div style={{ background: "linear-gradient(165deg, #fff0f8, #ffb5d9)" }} className="rounded bg-white">
                       <Image src={inst.photo} alt="" className="block size-full object-cover object-top" sizes="(max-width: 640px) 200px, 280px" />
@@ -119,25 +103,18 @@ export function Instructors() {
                     <h3 className="relative font-display sm:text-5xl text-4xl font-extrabold whitespace-nowrap text-ink">{inst.name}</h3>
                     <p className="inline-block rounded-ui bg-brand-deep text-white px-3 py-0.5 sm:text-base text-sm font-bold">{inst.role}</p>
                     <p className="text-sm text-ink-soft">{inst.school}</p>
+                    <p className="text-2xl">{inst.quote}</p>
                   </div>
                 </header>
 
                 <ul className="flex flex-col gap-2 ">
-                  {inst.points.map((point, i) => {
-                    const variant = chipVariants[i % chipVariants.length];
-                    return (
-                      <li key={point} className={`flex gap-1.5 rounded-ui px-3 py-1.5 text-sm leading-snug font-medium ${variant.bg} ${variant.text}`}>
-                        <HiCheckBadge className="size-4 shrink-0 mt-0.5" />
-                        {point}
-                      </li>
-                    );
-                  })}
+                  {inst.points.map((point, i) => (
+                    <li key={point} className={`flex gap-1.5 rounded-ui px-3 py-1.5 text-sm leading-snug font-medium bg-tint-pink text-brand-deep`}>
+                      <HiCheckBadge className="size-4 shrink-0 mt-0.5" />
+                      {point}
+                    </li>
+                  ))}
                 </ul>
-
-                <div className="text-sm text-ink-soft flex items-baseline">
-                  <p className="text-5xl text-brand mr-2 tracking-tight">{inst.stat.value}</p>
-                  {inst.stat.label}
-                </div>
               </div>
             </article>
           </Reveal>

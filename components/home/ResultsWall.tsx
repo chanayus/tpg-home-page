@@ -11,18 +11,9 @@ import thumbsUpSticker from "@/public/images/stickers/thumbs-up.webp";
 
 /* ---------- shared: ใช้ร่วมกันทั้งเวอร์ชัน desktop และ mobile ---------- */
 
-const tileVariants = [
-  { bg: "bg-tint-pink", text: "text-brand-deep", shadow: "shadow-[0_14px_28px_rgba(255,0,126,0.12)]" },
-  { bg: "bg-tint-purple", text: "text-purple-deep", shadow: "shadow-[0_14px_28px_rgba(161,69,255,0.14)]" },
-  { bg: "bg-tint-yellow", text: "text-gold-ink", shadow: "shadow-[0_14px_28px_rgba(255,173,2,0.16)]" },
-];
+const reviewBgCard = ["bg-tint-pink", "bg-tint-purple", "bg-tint-yellow"];
 
-type TileVariant = (typeof tileVariants)[number];
-
-function tileClassName(variant: TileVariant) {
-  return `grid place-items-center rounded-photo p-2 text-center text-base leading-normal font-medium ${variant.bg} ${variant.text} ${variant.shadow}`;
-}
-
+// ตำแหน่งการวางและหมุนของ review card แต่่ละอัน
 const scatterSpots = [
   { top: "-2%", left: "4%", rotate: -6, ratio: "3/4", variant: 0 },
   { top: "38%", left: "84%", rotate: 5, ratio: "1/1", variant: 2 },
@@ -36,11 +27,19 @@ const scatterSpots = [
   { top: "85%", left: "82%", rotate: 5, ratio: "1/1", variant: 2 },
 ];
 
-// `top`/`left` only matter to the desktop scatter layout — the mobile grid ignores them and lets CSS place the cards.
+// ข้อมูลรูปภาพ (mockup)
+const reviewImages = [
+  ...Array(10)
+    .keys()
+    .map((i) => "/images/comment.jpg"),
+];
+
+// นำข้อมูล รูป กับ ตำแหน่ง มารวมกันเพื่อเอาไปใช้ render
 const reviews = scatterSpots.map((spot, i) => ({
   ...spot,
   badge: String(i + 1).padStart(2, "0"),
-  variant: tileVariants[spot.variant],
+  bg: reviewBgCard[spot.variant],
+  image: reviewImages[i],
 }));
 
 type Review = (typeof reviews)[number];
@@ -51,20 +50,10 @@ const REVIEW_DURATION = ((REVIEW_END - REVIEW_START) / reviews.length) * 2.2;
 const REVIEW_STAGGER = (REVIEW_END - REVIEW_START - REVIEW_DURATION) / (reviews.length - 1);
 const REVIEW_RISE = 160;
 
-const REVIEW_IMAGE = "/images/comment.jpg";
-const REVIEW_IMAGE_CLASS = "size-full rounded-photo object-cover";
-
-function reviewLayoutId(badge: string) {
+function getReviewLayoutId(badge: string) {
   return `review-photo-${badge}`;
 }
 
-/**
- * The photo tile both walls render. `index`/`progress` drive the desktop scroll-rise via
- * useTransform — the mobile grid passes a MotionValue that's pinned past REVIEW_END, so the
- * same transform just resolves to its settled value (y: 0) with no extra branching needed.
- * `onSelect` is what turns a card interactive (button + shared layoutId into the lightbox);
- * the mobile grid omits it and renders a plain, non-clickable photo.
- */
 function ReviewCard({
   review,
   index,
@@ -87,18 +76,21 @@ function ReviewCard({
   const y = useTransform(progress, [start, end], [REVIEW_RISE, 0]);
 
   return (
-    <motion.figure style={{ ...style, aspectRatio: review.ratio, rotate: review.rotate, y }} className={`${tileClassName(review.variant)} ${className ?? ""}`}>
+    <motion.figure
+      style={{ ...style, aspectRatio: review.ratio, rotate: review.rotate, y }}
+      className={`grid place-items-center rounded-xl p-2 text-center text-base leading-normal font-medium ${review.bg} ${className ?? ""}`}
+    >
       {onSelect ? (
         <button
           type="button"
           onClick={() => onSelect(review)}
           aria-label={`ดูรีวิว ${review.badge} แบบเต็ม`}
-          className="block size-full cursor-zoom-in rounded-photo focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          className="block size-full cursor-zoom-in rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
         >
-          <motion.img layoutId={reviewLayoutId(review.badge)} style={{ opacity: isActive ? 0 : 1 }} className={REVIEW_IMAGE_CLASS} src={REVIEW_IMAGE} alt="" />
+          <motion.img layoutId={getReviewLayoutId(review.badge)} style={{ opacity: isActive ? 0 : 1 }} className={"size-full rounded-xl object-cover"} src={review.image} alt="" />
         </button>
       ) : (
-        <img className={REVIEW_IMAGE_CLASS} src={REVIEW_IMAGE} alt="" />
+        <img className={"size-full rounded-xl object-cover"} src={review.image} alt="" />
       )}
     </motion.figure>
   );
@@ -118,7 +110,7 @@ type Sticker = (typeof stickers)[number];
 
 function StickerCharm({ sticker, progress }: { sticker: Sticker; progress: MotionValue<number> }) {
   const end = sticker.start + STICKER_DURATION;
-  // slides in from just past the section's clipped edge, not the viewport edge, so it's fully hidden at rest
+
   const offscreen = sticker.side === "left" ? -(sticker.width + 200) : sticker.width + 200;
 
   const x = useTransform(progress, [sticker.start, end], [offscreen, 0]);
@@ -138,8 +130,7 @@ function StickerCharm({ sticker, progress }: { sticker: Sticker; progress: Motio
 function PinnedResultsWall({ selectedBadge, onSelect }: { selectedBadge: string | null; onSelect: (review: Review) => void }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: rawProgress } = useScroll({ target: trackRef, offset: ["start start", "end end"] });
-  // Motion's scroll progress briefly overshoots outside [0,1] right as the sticky
-  // section releases, which snapped card opacity to 0 without this clamp.
+
   const scrollYProgress = useTransform(rawProgress, (v) => Math.min(1, Math.max(0, v)));
   const containerY = useTransform(scrollYProgress, [0, 1], ["100%", "-25%"]);
 
@@ -175,9 +166,9 @@ function PinnedResultsWall({ selectedBadge, onSelect }: { selectedBadge: string 
   );
 }
 
-// Only PinnedResultsWall's ReviewCards open this (the mobile grid's cards aren't clickable),
-// so it lives with the rest of the desktop flow even though it's rendered from ResultsWall().
-function ResultsLightbox({ review, onClose }: { review: Review; onClose: () => void }) {
+// หน้าต่าง popup แสดงภาพ review แบบเต็มเมื่อกดคลิก
+
+function ImageModal({ review, onClose }: { review: Review; onClose: () => void }) {
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -200,13 +191,13 @@ function ResultsLightbox({ review, onClose }: { review: Review; onClose: () => v
       className="fixed inset-0 z-50 grid place-items-center bg-ink/85 p-6"
     >
       <motion.img
-        layoutId={reviewLayoutId(review.badge)}
-        src={REVIEW_IMAGE}
+        layoutId={getReviewLayoutId(review.badge)}
+        src={review.image}
         alt=""
         onClick={(event) => event.stopPropagation()}
         transition={shouldReduceMotion ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 30 }}
         style={{ aspectRatio: 0.8 }}
-        className="max-h-[88vh] max-w-[92vw] w-[min(92vw,640px)] rounded-photo object-cover shadow-[0_30px_60px_rgba(0,0,0,0.45)]"
+        className="max-h-[88vh] max-w-[92vw] w-[min(92vw,640px)] rounded-xl object-cover shadow-[0_30px_60px_rgba(0,0,0,0.45)]"
       />
       <button
         type="button"
@@ -223,7 +214,6 @@ function ResultsLightbox({ review, onClose }: { review: Review; onClose: () => v
 /* ---------- mobile: static grid wall (also the fallback under prefers-reduced-motion) ---------- */
 
 function StaticResultsWall() {
-  // ReviewCard's scroll-rise transform is fed a value already past REVIEW_END, so it clamps to its settled state (y: 0) — no scroll here, just a static, always-settled card.
   const settledProgress = useMotionValue(1);
 
   return (
@@ -278,7 +268,7 @@ export function ResultsWall() {
   return (
     <>
       {isDesktop && !shouldReduceMotion ? <PinnedResultsWall selectedBadge={selectedReview?.badge ?? null} onSelect={setSelectedReview} /> : <StaticResultsWall />}
-      <AnimatePresence>{selectedReview && <ResultsLightbox review={selectedReview} onClose={() => setSelectedReview(null)} />}</AnimatePresence>
+      <AnimatePresence>{selectedReview && <ImageModal review={selectedReview} onClose={() => setSelectedReview(null)} />}</AnimatePresence>
     </>
   );
 }

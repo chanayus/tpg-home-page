@@ -46,13 +46,14 @@
 
   --font-display: var(--font-fc-friday), var(--font-noto-sans-thai), system-ui, sans-serif;
   --font-sans: var(--font-fc-friday), var(--font-noto-sans-thai), system-ui, sans-serif;
-  --text-section: clamp(30px, 4.6vw, 48px);
-  --spacing-section: clamp(56px, 8vw, 104px);
+
+  --text-section: clamp(2rem, 4.6vw, 3rem);
+  --spacing-section: clamp(3.5rem, 8vw, 6.5rem);
+
   --tracking-tight: -0.01em;
 
-  --radius-panel: 20px;
-  --radius-ui: 6px;
-  --radius-photo: 5%;
+  --radius-panel: 1.25rem;
+  --radius-ui: 0.375rem;
 
   --text-2xs: 10px;
 }
@@ -110,7 +111,10 @@
 
 @utility text-stroke-lg {
   -webkit-text-stroke: 0.022em currentColor;
+}
 
+@utility text-section {
+  line-height: 1;
 }
 
 @utility grain-overlay {

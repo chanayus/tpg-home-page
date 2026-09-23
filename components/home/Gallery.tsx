@@ -25,7 +25,7 @@ export function Gallery() {
     <section id="gallery" aria-labelledby="gallery-title" className="relative overflow-hidden py-section">
       <div className="container relative z-1">
         <Reveal as="h2" id="gallery-title" className="text-stroke-lg spark-after font-display text-section mb-8 font-extrabold">
-          บรรยากาศ<em className="text-brand not-italic">การเรียน</em>
+          บรรยากาศ <span className="text-brand">"พี่มาติว"</span> The Progress ติวฟรีโรงเรียนทั่วประเทศ
         </Reveal>
       </div>
 
@@ -45,9 +45,11 @@ export function Gallery() {
           >
             {slides.map((slide, i) => (
               <SwiperSlide key={i}>
-                <figure className="relative aspect-video overflow-hidden rounded-photo shadow-[0_22px_44px_rgba(255,0,126,0.16)]">
+                <figure className="relative aspect-video overflow-hidden rounded-2xl shadow-[0_22px_44px_rgba(255,0,126,0.16)]">
                   <img src={slide.image} alt={slide.desc ?? ""} className="size-full object-cover" />
-                  {slide.desc && <figcaption className="absolute inset-x-4 bottom-4 rounded-ui bg-black/55 px-4 py-2 text-center text-sm font-medium text-white backdrop-blur-sm">{slide.desc}</figcaption>}
+                  {slide.desc && (
+                    <figcaption className="absolute inset-x-4 bottom-4 rounded-ui bg-black/55 px-4 py-2 text-center text-sm font-medium text-white backdrop-blur-sm">{slide.desc}</figcaption>
+                  )}
                 </figure>
               </SwiperSlide>
             ))}

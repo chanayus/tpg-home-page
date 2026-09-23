@@ -9,10 +9,8 @@ import tKedPhoto from "@/public/images/t-ked.webp";
 import tWinPhoto from "@/public/images/t-win.webp";
 import { IconSpark, IconSquiggle } from "./SvgProps";
 
-/** มุมเอียงปลายทางของ entrance — ท่าลอยต้องแกว่งรอบค่านี้ ไม่ใช่รอบ 0 จึงถือไว้ที่เดียว */
 const tilt = { win: -5, ked: 4, sticker: -7, sticker2: 6, spark1: 10, spark2: 0, spark3: 12 };
 
-/** ลอยค้างหลัง entrance จบ คาบตั้งไม่ให้หารกันลงตัว สามชิ้นจะได้เลื่อนเฟสออกจากกันแทนที่จะขึ้นลงพร้อมกัน */
 const floats = [
   { selector: ".hero-photo-win", y: [0, -6], rotate: [tilt.win, tilt.win + 1.2], duration: 3.5 },
   { selector: ".hero-photo-ked", y: [0, -10], rotate: [tilt.ked, tilt.ked - 1], duration: 4.25 },
@@ -20,12 +18,6 @@ const floats = [
   { selector: ".hero-sticker-2", y: [0, -5], rotate: [tilt.sticker2, tilt.sticker2 - 0.8], duration: 3.75 },
 ];
 
-/**
- * ทุก step อยู่ที่ property เดียวกัน ไม่ว่าจะ reduced-motion หรือไม่ — ต่างกันแค่ transition
- * (spring/stagger ปกติ VS duration 0 กระโดดไปค่าสุดท้ายทันที) เพื่อให้ shouldReduceMotion
- * ไม่ไปยุ่งกับ className/SSR เลย (แก้ hydration mismatch ที่ทำให้ opacity-0 ค้างถาวร เพราะ
- * React ไม่ patch attribute ที่ไม่ตรงกันหลัง hydrate ให้)
- */
 type EntranceStep = [string, DOMKeyframesDefinition, AnimationOptions & { at?: number | string }];
 
 const entranceSteps: EntranceStep[] = [
@@ -111,7 +103,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative mx-auto aspect-[1/1.04] w-full max-w-135 max-[860px]:max-w-110" aria-label="พี่วินและพี่เกด">
+        <div className="relative mx-auto aspect-square w-full max-w-135 max-md:max-w-110" aria-label="พี่วินและพี่เกด">
           <div
             style={{ background: "linear-gradient(165deg, #fff0f8, #ffb5d9)" }}
             className="hero-photo-win absolute top-0 right-[3%] w-[54%] overflow-hidden rounded-xl border-[6px] border-white shadow-[0_30px_54px_rgba(120,0,60,0.34)] opacity-0"
@@ -133,7 +125,7 @@ export function Hero() {
             TGAT · A-Level
           </div>
 
-          <IconSpark className="hero-spark-1 absolute max-sm:hidden top-[-8%] left-[40%] z-3 w-[17%] text-gold drop-shadow-[0_8px_10px_rgba(120,0,60,0.25)] opacity-0" />
+          <IconSpark className="hero-spark-1 absolute top-[-8%] left-[40%] z-3 w-[17%] text-gold drop-shadow-[0_8px_10px_rgba(120,0,60,0.25)] opacity-0" />
           <IconSpark className="hero-spark-2 absolute top-[46%] right-[-2%] z-3 w-[9%] text-purple-sticker opacity-0" />
           <IconSpark className="hero-spark-3 absolute bottom-[3%] left-[36%] z-3 w-[7%] text-brand-deep opacity-0" />
         </div>
