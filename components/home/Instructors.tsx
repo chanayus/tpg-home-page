@@ -23,7 +23,6 @@ const instructors = [
       `วิทยากรรับเชิญโรงเรียนชั้นนำระดับประเทศมากมาย`,
       `เจ้าของโครงการติวฟรีเพื่อเด็กไทย "พี่มาติว"`,
     ],
-    cardRotate: -1,
     photoRotate: -2,
   },
   {
@@ -33,7 +32,6 @@ const instructors = [
     school: "ป.โท การสอนภาษาอังกฤษ ธรรมศาสตร์",
     quote: `"ภาษาอังกฤษไม่ได้วัดว่าเรารู้กี่คำ แต่วัดว่าเราใช้สิ่งที่รู้ได้แค่ไหน"`,
     points: [`ประสบการณ์การสอนในแวดวงวิชาการมากกว่า 9 ปี`, `ผู้เขียนหนังสือ Best Seller “900 คลังศัพท์คัดพิเศษ”`, `วิทยากรรับเชิญโรงเรียนชั้นนำระดับประเทศมากมาย`, `เจ้าของมหกรรมการศึกษา TCAS SPACE`],
-    cardRotate: 1,
     photoRotate: 2,
   },
 ];
@@ -76,7 +74,7 @@ export function Instructors() {
       </motion.div>
 
       <hgroup className="container relative z-1">
-        <Reveal as="h2" id="instructors-title" className="text-stroke-lg spark-after font-display text-section font-extrabold">
+        <Reveal as="h2" id="instructors-title" className="section-title">
           ทีมผู้สอนสุดจะ<em className="text-brand not-italic">เริ่ด</em>
         </Reveal>
       </hgroup>

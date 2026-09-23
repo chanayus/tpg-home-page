@@ -48,7 +48,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         <Footer />
 
-        <Button variant="line-solid" href="https://line.me/R/ti/p/@453qifrr" target="_blank" rel="noreferrer" size="md" className="fixed right-4 bottom-5 z-50">
+        <Button variant="line-solid" href="https://line.me/R/ti/p/@453qifrr" size="md" className="fixed right-4 bottom-5 z-50">
           LINE Admin <FiArrowUpRight size={"1.25rem"} />
         </Button>
 

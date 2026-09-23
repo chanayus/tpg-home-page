@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { cn } from "../../lib/cn";
 import { Reveal } from "../Reveal";
 
 interface SlideImage {
@@ -20,11 +21,29 @@ const slides: SlideImage[] = [
   { image: "/images/course.jpg" },
 ];
 
+// gallery-prev / gallery-next คือ selector ที่ Swiper ใช้ผูกปุ่ม (navigation prop ด้านล่าง)
+function NavArrow({ direction }: { direction: "prev" | "next" }) {
+  const isPrev = direction === "prev";
+  const Icon = isPrev ? HiChevronLeft : HiChevronRight;
+  return (
+    <button
+      type="button"
+      aria-label={isPrev ? "ภาพก่อนหน้า" : "ภาพถัดไป"}
+      className={cn(
+        "absolute top-1/2 z-1 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-brand-deep shadow-[0_8px_16px_rgba(120,0,60,0.2)] transition hover:bg-tint-pink sm:flex",
+        isPrev ? "gallery-prev -left-2 sm:-left-5" : "gallery-next -right-2 sm:-right-5",
+      )}
+    >
+      <Icon className="size-6" />
+    </button>
+  );
+}
+
 export function Gallery() {
   return (
     <section id="gallery" aria-labelledby="gallery-title" className="relative overflow-hidden py-section">
       <div className="container relative z-1">
-        <Reveal as="h2" id="gallery-title" className="text-stroke-lg spark-after font-display text-section mb-8 font-extrabold">
+        <Reveal as="h2" id="gallery-title" className="section-title mb-8">
           บรรยากาศ <span className="text-brand">"พี่มาติว"</span> The Progress ติวฟรีโรงเรียนทั่วประเทศ
         </Reveal>
       </div>
@@ -55,20 +74,8 @@ export function Gallery() {
             ))}
           </Swiper>
 
-          <button
-            type="button"
-            aria-label="ภาพก่อนหน้า"
-            className="gallery-prev absolute top-1/2 -left-2 z-1 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-brand-deep shadow-[0_8px_16px_rgba(120,0,60,0.2)] transition hover:bg-tint-pink sm:-left-5 sm:flex"
-          >
-            <HiChevronLeft className="size-6" />
-          </button>
-          <button
-            type="button"
-            aria-label="ภาพถัดไป"
-            className="gallery-next absolute top-1/2 -right-2 z-1 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white text-brand-deep shadow-[0_8px_16px_rgba(120,0,60,0.2)] transition hover:bg-tint-pink sm:-right-5 sm:flex"
-          >
-            <HiChevronRight className="size-6" />
-          </button>
+          <NavArrow direction="prev" />
+          <NavArrow direction="next" />
         </div>
 
         <div

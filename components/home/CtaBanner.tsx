@@ -7,10 +7,7 @@ export function CtaBanner() {
   return (
     <section className="py-[clamp(40px,6vw,72px)]">
       <div className="container">
-        <div
-          style={{ background: "linear-gradient(255deg, #ff5aa9 0%, #ff1a8c 24%, #e0006f 60%, #c8005f 100%)" }}
-          className="relative overflow-hidden rounded-panel px-[clamp(20px,5vw,60px)] py-[clamp(48px,8vw,100px)] text-center text-white"
-        >
+        <div className="bg-grad-cta relative overflow-hidden rounded-panel px-[clamp(20px,5vw,60px)] py-[clamp(48px,8vw,100px)] text-center text-white">
           <div className="grain-overlay absolute" />
           <SquiggleReveal amount={0.5}>
             <IconSquiggle className="pointer-events-none absolute top-[-30%] left-[-4%] h-170 w-auto text-white/14" />
@@ -29,10 +26,10 @@ export function CtaBanner() {
             </h2>
             <p className="mx-auto mt-4 mb-7 max-w-130 text-lg font-medium">ทักไลน์วันนี้ พี่วินพี่เกดตอบเอง ปรึกษาเส้นทางการเรียนได้ฟรี</p>
             <div className="flex flex-wrap justify-center gap-3">
-              <Button className="min-w-48" variant="white" size="lg" href="https://line.me/R/ti/p/@453qifrr" target="_blank" rel="noreferrer">
+              <Button className="min-w-48" variant="white" size="lg" href="https://line.me/R/ti/p/@453qifrr">
                 แอดไลน์ปรึกษาฟรี
               </Button>
-              <Button className="min-w-48" variant="glass" size="lg" href="https://line.me/R/ti/p/@453qifrr" target="_blank" rel="noreferrer">
+              <Button className="min-w-48" variant="glass" size="lg" href="https://line.me/R/ti/p/@453qifrr">
                 ทดลองเรียนฟรี
               </Button>
             </div>

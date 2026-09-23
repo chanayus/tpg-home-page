@@ -97,7 +97,7 @@ export function RecommendedCourses() {
     <section id="courses" aria-labelledby="courses-title" className="deco-sparkles relative overflow-hidden bg-linear-to-b from-tint-pink to-blush py-section">
       <div className="container relative z-1">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-5">
-          <Reveal as="h2" id="courses-title" className="text-stroke-lg spark-after font-display text-section font-extrabold">
+          <Reveal as="h2" id="courses-title" className="section-title">
             คอร์สที่<em className="text-brand not-italic">แนะนำ</em>
           </Reveal>
           <Reveal>

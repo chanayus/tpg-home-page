@@ -5,6 +5,12 @@ import { useState, useEffect } from "react";
 // import { doc, onSnapshot } from 'firebase/firestore';
 // import { firestore } from '../utils/firebaseClient';
 
+const mockupData = [
+  ...Array(10)
+    .keys()
+    .map((value) => "/images/student.webp"),
+];
+
 function MarqueeRow({ ariaHidden = false, data = [] }: { ariaHidden?: boolean; data: string[] }) {
   return (
     <div className="flex w-max shrink-0 gap-3" aria-hidden={ariaHidden || undefined}>
@@ -35,12 +41,6 @@ export function StudentSuccess() {
   //   );
   //   return () => unsub();
   // }, []);
-
-  const mockupData = [
-    ...Array(10)
-      .keys()
-      .map((value) => "/images/student.webp"),
-  ];
 
   const students = studentImage ?? mockupData;
 

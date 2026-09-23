@@ -62,13 +62,7 @@ export function Hero() {
   }, [animate, shouldReduceMotion]);
 
   return (
-    <section
-      ref={scope}
-      className="relative z-2 overflow-hidden min-h-screen 2xl:pt-48 pt-32 pb-32 text-white"
-      style={{
-        background: "radial-gradient(46% 60% at 100% 0%, #ffd2ea 0%, rgba(255,210,234,0) 70%), linear-gradient(255deg, #ff8cc6 0%, #ff2d97 26%, #e8006f 54%, #d1006a 100%)",
-      }}
-    >
+    <section ref={scope} className="bg-grad-hero relative z-2 overflow-hidden min-h-screen 2xl:pt-48 pt-32 pb-32 text-white">
       <div className="grain-overlay absolute" />
       <IconSquiggle className="hero-squiggle pointer-events-none absolute top-[-8%] right-[-3%] z-0 h-[118%] w-auto text-white/17 max-[860px]:right-[-30%] max-[860px]:opacity-80 [&>path]:[stroke-dasharray:1] [&>path]:[stroke-dashoffset:1]" />
 
@@ -89,7 +83,7 @@ export function Hero() {
             <Button variant="white" size="lg" href="#courses">
               ดูคอร์สทั้งหมด
             </Button>
-            <Button variant="glass" size="lg" href="https://line.me/R/ti/p/@453qifrr" target="_blank" rel="noreferrer">
+            <Button variant="glass" size="lg" href="https://line.me/R/ti/p/@453qifrr">
               ทดลองเรียนฟรี
             </Button>
           </div>

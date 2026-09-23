@@ -140,8 +140,8 @@ export function WhyUs() {
         <Image src={cardDreamUniversitySticker} alt="" className="h-auto w-full" />
       </motion.div>
 
-      <Reveal as="div" stagger={0.2} className="container relative z-1">
-        <h2 id="why-title" className="text-stroke-lg spark-after font-display text-section font-extrabold">
+      <Reveal stagger={0.2} className="container relative z-1">
+        <h2 id="why-title" className="section-title">
           ทำไมต้อง <em className="text-brand not-italic">The Progress</em>
         </h2>
         <p className="mt-2.5 max-w-140 sm:text-lg text-ink-soft">ใส่ใจ ใกล้ชิด สอบติดไปด้วยกัน คือคติพจน์ของเรา เลือกหัวข้อแล้วกดเปิดดูรายละเอียดได้เลย</p>
@@ -163,8 +163,8 @@ export function WhyUs() {
                   onClick={() => setTab(id)}
                   onKeyDown={(e) => onTabKeyDown(e, index)}
                   className={cn(
-                    "text-stroke flex items-center gap-3.5 rounded-ui py-3.5 pr-5.5 pl-3.5 text-left shadow-[0_12px_26px_rgba(255,0,126,0.12),inset_0_0_0_1px_var(--hair)] transition-all hover:scale-97 hover:bg-blush",
-                    active ? "bg-grad-pink text-white shadow-[0_16px_32px_rgba(255,0,126,0.34)] hover:scale-97" : "bg-white text-brand",
+                    "text-stroke flex items-center gap-3.5 rounded-ui py-3.5 pr-5.5 pl-3.5 text-left shadow-[0_12px_26px_rgba(255,0,126,0.12),inset_0_0_0_1px_var(--hair)] transition-all hover:scale-98 hover:bg-blush",
+                    active ? "bg-grad-pink text-white shadow-[0_16px_32px_rgba(255,0,126,0.34)]" : "bg-white text-brand",
                   )}
                 >
                   <Icon className="lg:size-10 size-8 shrink-0" />

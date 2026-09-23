@@ -23,8 +23,6 @@ type RevealOwnProps = {
   delay?: number;
   /** How much of the block must be visible before it triggers (0-1, or "some"/"all"). */
   amount?: number | "some" | "all";
-  /** Replay every time it re-enters the viewport instead of only the first. */
-  repeat?: boolean;
 
   keyframes?: DOMKeyframesDefinition;
 
@@ -35,9 +33,9 @@ type RevealProps<T extends ElementType> = RevealOwnProps & {
   as?: T;
 } & Omit<ComponentPropsWithoutRef<T>, keyof RevealOwnProps | "as">;
 
-export function Reveal<T extends ElementType = "div">({ as, children, stagger: staggerBy, delay = 0.2, amount = "some", repeat = false, keyframes, transition, ...rest }: RevealProps<T>) {
+export function Reveal<T extends ElementType = "div">({ as, children, stagger: staggerBy, delay = 0.2, amount = "some", keyframes, transition, ...rest }: RevealProps<T>) {
   const [scope, animate] = useAnimate<HTMLElement>();
-  const isInView = useInView(scope, { once: !repeat, amount });
+  const isInView = useInView(scope, { once: true, amount });
   const shouldReduceMotion = useReducedMotion();
 
   const mode = staggerBy === undefined ? "block" : "children";

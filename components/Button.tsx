@@ -5,12 +5,7 @@ import { cn } from "../lib/cn";
 type Variant = "solid" | "white" | "glass" | "line" | "line-solid" | "nav";
 type Size = "sm" | "md" | "lg";
 
-const BASE = [
-  "btn flex items-center justify-center gap-2 rounded-ui font-bold whitespace-nowrap text-stroke",
-  "transition-all duration-200 ease-out",
-  "[--btn-shadow:color-mix(in_oklab,var(--brand)_45%,transparent)]",
-  "active:translate-y-0 active:shadow-[0_4px_10px_-2px_var(--btn-shadow)]",
-];
+const BASE = "flex items-center justify-center gap-2 rounded-ui font-bold whitespace-nowrap text-stroke hover:translate-y-0.5 transition-all duration-200 ease-out";
 
 const VARIANT_CLASS: Record<Variant, string> = {
   solid: "text-white bg-brand hover:bg-brand-hover",
@@ -44,7 +39,8 @@ export function Button({ variant, size, className, ...props }: ButtonProps) {
 
   if (props.href !== undefined) {
     const { href, ...rest } = props;
-    return <Link href={href} className={classes} {...rest} />;
+    const isExternal = typeof href === "string" && href.startsWith("http");
+    return <Link href={href} className={classes} {...(isExternal && { target: "_blank", rel: "noreferrer" })} {...rest} />;
   }
 
   const { type = "button", ...rest } = props;

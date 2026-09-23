@@ -32,6 +32,20 @@ const scatterSpots = [
 
 type Review = (typeof scatterSpots)[number] & { badge: string; bg: string; image: string };
 
+// ข้อมูลรูปภาพ (mockup)
+const mockupData = [
+  ...Array(10)
+    .keys()
+    .map((i) => "/images/comment.jpg"),
+];
+
+// มีผลจริงเฉพาะ desktop pinned — ฝั่ง static ส่ง progress คงที่ 1 ทำให้ y = 0 เสมอ
+const REVIEW_START = 0.05;
+const REVIEW_END = 0.95;
+const REVIEW_DURATION = ((REVIEW_END - REVIEW_START) / scatterSpots.length) * 2.2;
+const REVIEW_STAGGER = (REVIEW_END - REVIEW_START - REVIEW_DURATION) / (scatterSpots.length - 1);
+const REVIEW_RISE = 160;
+
 function getReviewLayoutId(badge: string) {
   return `review-photo-${badge}`;
 }
@@ -53,12 +67,6 @@ function ReviewCard({
   isActive?: boolean;
   onSelect?: (review: Review) => void;
 }) {
-  const REVIEW_START = 0.05;
-  const REVIEW_END = 0.95;
-  const REVIEW_DURATION = ((REVIEW_END - REVIEW_START) / scatterSpots.length) * 2.2;
-  const REVIEW_STAGGER = (REVIEW_END - REVIEW_START - REVIEW_DURATION) / (scatterSpots.length - 1);
-  const REVIEW_RISE = 160;
-
   const start = REVIEW_START + index * REVIEW_STAGGER;
   const end = start + REVIEW_DURATION;
   const y = useTransform(progress, [start, end], [REVIEW_RISE, 0]);
@@ -66,7 +74,7 @@ function ReviewCard({
   return (
     <motion.figure
       style={{ ...style, aspectRatio: review.ratio, rotate: review.rotate, y }}
-      className={cn("grid place-items-center rounded-xl p-2 text-center text-base leading-normal font-medium", review.bg, className)}
+      className={cn("grid place-items-center rounded-xl p-2", review.bg, className)}
     >
       {onSelect ? (
         <button
@@ -126,9 +134,9 @@ function PinnedStudentComments({ data, selectedBadge, onSelect }: { data: Review
     <div ref={trackRef} className="relative h-[300vh]">
       <section id="results" aria-labelledby="results-title" className="grid-tint-bg sticky top-0 h-screen overflow-hidden bg-white py-section">
         <div className="container relative z-1 flex h-full flex-col items-center justify-center">
-          <motion.h2 id="results-title" className="text-stroke-lg spark-after text-center font-display text-6xl font-extrabold text-balance">
+          <h2 id="results-title" className="text-stroke-lg spark-after text-center font-display text-6xl font-extrabold text-balance">
             เสียงตอบรับจริงจากลูกศิษย์ <em className="text-brand not-italic">The Progress</em>
-          </motion.h2>
+          </h2>
         </div>
 
         <motion.ul style={{ y: containerY }} className="absolute h-screen inset-y-0 left-1/2 z-2 w-full max-w-5xl -translate-x-1/2">
@@ -269,13 +277,6 @@ export function StudentComments() {
   //   return () => unsub();
   // }, []);
 
-  // ข้อมูลรูปภาพ (mockup)
-  const mockupData = [
-    ...Array(10)
-      .keys()
-      .map((i) => "/images/comment.jpg"),
-  ];
-
   const images = commentImages ?? mockupData;
 
   if (images.length === 0) return null;
@@ -286,9 +287,6 @@ export function StudentComments() {
     bg: reviewBgCard[spot.variant],
     image: mockupData[i],
   }));
-
-  console.log(data);
-  
 
   return (
     <>
