@@ -45,8 +45,8 @@ export function Navbar() {
               <li key={link.name}>
                 <Link
                   href={link.href}
-                  className={cn("text-stroke block rounded-ui px-3 py-2 text-base font-semibold whitespace-nowrap text-white transition-colors hover:bg-white/20", {
-                    "bg-white/20": link.href === pathname,
+                  className={cn("block rounded-ui px-3 py-2 text-base whitespace-nowrap text-white transition-colors hover:bg-brand-deep/50", {
+                    "bg-brand-deep/50": link.href === pathname,
                   })}
                 >
                   {link.name}
@@ -70,6 +70,7 @@ export function Navbar() {
 function MobileNav() {
   const [open, setOpen] = useState(false);
   const panelId = useId();
+  const pathname = usePathname();
   const shouldReduceMotion = useReducedMotion();
 
   return (
@@ -99,7 +100,13 @@ function MobileNav() {
             <ul className="mx-auto grid max-w-2xl gap-1">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} onClick={() => setOpen(false)} className="block rounded-ui px-4.5 py-3 text-base font-semibold text-white hover:bg-white/16">
+                  <Link
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className={cn("block rounded-ui px-4.5 py-3 text-base text-white hover:bg-brand-deep", {
+                      "bg-brand-deep": link.href === pathname,
+                    })}
+                  >
                     {link.name}
                   </Link>
                 </li>

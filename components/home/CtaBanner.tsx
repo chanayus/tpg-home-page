@@ -19,12 +19,12 @@ export function CtaBanner() {
           </Reveal>
 
           <Reveal className="relative z-2 mx-auto max-w-3xl" stagger={0.1} amount={0.5}>
-            <h2 className="text-stroke-lg font-display text-[clamp(36px,6.5vw,67.2px)] leading-none font-extrabold text-balance text-shadow-[0_6px_0_rgba(120,0,60,0.16)]">
+            <h2 className="text-stroke-lg text-[clamp(36px,6.5vw,67.2px)] leading-none text-balance text-shadow-[0_6px_0_rgba(120,0,60,0.16)]">
               พร้อมสอบติด
               <br />
               ไปด้วยกันหรือยัง?
             </h2>
-            <p className="mx-auto mt-4 mb-7 max-w-130 text-lg font-medium">ทักไลน์วันนี้ พี่วินพี่เกดตอบเอง ปรึกษาเส้นทางการเรียนได้ฟรี</p>
+            <p className="mx-auto mt-4 mb-7 max-w-130 text-lg ">ทักไลน์วันนี้ พี่วินพี่เกดตอบเอง ปรึกษาเส้นทางการเรียนได้ฟรี</p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button className="min-w-48" variant="white" size="lg" href="https://line.me/R/ti/p/@453qifrr">
                 แอดไลน์ปรึกษาฟรี

@@ -88,23 +88,23 @@ export function Instructors() {
           >
             <article className="mx-auto flex w-full max-w-4xl border border-brand-deep/20 flex-col items-start xl:gap-8 gap-6 gap-y-8 rounded-panel bg-white lg:p-10 p-6 lg:pr-4 shadow-[0_22px_44px_rgba(255,0,126,0.14)] lg:flex-row transition-transform duration-300 ease-out hover:-translate-y-2">
               {/* inst for image desktop */}
-              <InstructorPhoto photo={inst.photo} rotate={inst.photoRotate} className="xl:w-40 w-32 max-lg:hidden" />
+              <InstructorPhoto photo={inst.photo} rotate={inst.photoRotate} className="xl:w-40 w-32 max-xl:hidden" />
 
               <div className="flex-1 space-y-6 text-left w-full">
-                <header className="gap-x-6 flex">
+                <header className="gap-x-6 flex items-center">
                   {/* inst for image mobile */}
-                  <InstructorPhoto photo={inst.photo} rotate={inst.photoRotate} className="h-fit sm:w-32 w-27 lg:hidden" />
-                  <div className="space-y-4">
-                    <h3 className="relative font-display sm:text-5xl text-4xl font-extrabold whitespace-nowrap text-ink">{inst.name}</h3>
-                    <p className="inline-block rounded-ui bg-brand-deep text-white px-3 py-0.5 sm:text-base text-sm font-bold">{inst.role}</p>
+                  <InstructorPhoto photo={inst.photo} rotate={inst.photoRotate} className="h-fit sm:w-32 w-27 xl:hidden" />
+                  <div className="lg:space-y-4 space-y-3">
+                    <h3 className="relative sm:text-5xl text-4xl whitespace-nowrap text-ink">{inst.name}</h3>
+                    <p className="inline-block rounded-ui bg-brand-deep text-white px-3 py-0.5 sm:text-base text-sm">{inst.role}</p>
                     <p className="text-sm text-ink-soft">{inst.school}</p>
                   </div>
                 </header>
 
-                <p className="md:text-2xl text-xl max-md:text-center">{inst.quote}</p>
+                <p className="xl:text-2xl text-xl max-xl:text-center">{inst.quote}</p>
                 <ul className="flex flex-col gap-2 ">
                   {inst.points.map((point, i) => (
-                    <li key={point} className={`flex gap-1.5 rounded-ui px-3 py-1.5 text-sm leading-snug font-medium bg-tint-pink text-brand-deep`}>
+                    <li key={point} className={`flex gap-1.5 rounded-ui px-3 py-1.5 text-sm leading-snug bg-tint-pink text-brand-deep`}>
                       <HiCheckBadge className="size-4 shrink-0 mt-0.5" />
                       {point}
                     </li>

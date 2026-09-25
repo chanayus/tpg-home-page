@@ -134,7 +134,7 @@ function PinnedStudentComments({ data, selectedBadge, onSelect }: { data: Review
     <div ref={trackRef} className="relative h-[300vh]">
       <section id="results" aria-labelledby="results-title" className="grid-tint-bg sticky top-0 h-screen overflow-hidden bg-white py-section">
         <div className="container relative z-1 flex h-full flex-col items-center justify-center">
-          <h2 id="results-title" className="text-stroke-lg spark-after text-center font-display text-6xl font-extrabold text-balance">
+          <h2 id="results-title" className="text-stroke-lg spark-after text-center text-6xl text-balance">
             เสียงตอบรับจริงจากลูกศิษย์ <em className="text-brand not-italic">The Progress</em>
           </h2>
         </div>
@@ -199,7 +199,7 @@ function ImageModal({ review, onClose }: { review: Review; onClose: () => void }
         type="button"
         onClick={onClose}
         aria-label="ปิดภาพ"
-        className="absolute top-5 right-5 grid size-10 place-items-center rounded-full bg-white text-xl font-bold text-ink shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+        className="absolute top-5 right-5 grid size-10 place-items-center rounded-full bg-white text-xl text-ink shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
       >
         <IoClose />
       </button>
@@ -215,7 +215,7 @@ function StaticStudentComments({ data }: { data: Review[] }) {
   return (
     <Reveal as="section" id="results" aria-labelledby="results-title" amount="some" className="deco-sparkles grid-tint-bg relative overflow-hidden bg-white py-section">
       <div className="container relative z-1">
-        <h2 id="results-title" className="text-stroke-lg spark-after text-section font-bold text-balance">
+        <h2 id="results-title" className="section-title">
           เสียงตอบรับจริงจากลูกศิษย์ <em className="text-brand not-italic">The Progress</em>
         </h2>
 

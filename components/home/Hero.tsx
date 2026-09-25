@@ -62,14 +62,14 @@ export function Hero() {
   }, [animate, shouldReduceMotion]);
 
   return (
-    <section ref={scope} className="bg-grad-hero relative z-2 overflow-hidden min-h-screen 2xl:pt-48 pt-32 pb-32 text-white">
+    <section ref={scope} className=" bg-grad-hero relative z-2 overflow-hidden min-h-fit h-screen max-h-270 2xl:pt-48 pt-32 pb-32 text-white">
       <div className="grain-overlay absolute" />
       <IconSquiggle className="hero-squiggle pointer-events-none absolute top-[-8%] right-[-3%] z-0 h-[118%] w-auto text-white/17 max-[860px]:right-[-30%] max-[860px]:opacity-80 [&>path]:[stroke-dasharray:1] [&>path]:[stroke-dashoffset:1]" />
 
       <div className="container relative z-2 grid grid-cols-1 items-center gap-y-20 lg:grid-cols-[1.08fr_0.92fr]">
         <div className="hero-text">
           <p className="tracking-wide mb-3 text-white w-fit rounded opacity-0">(ติวสอบ TGAT · A-Level คณิต · อังกฤษ)</p>
-          <h1 className="font-display text-[clamp(72px,8vw,140px)] text-shadow-[0_6px_0_rgba(120,0,60,0.16)]  leading-[0.82] font-medium tracking-tight text-white opacity-0">
+          <h1 className="text-[clamp(72px,8vw,140px)] text-shadow-[0_6px_0_rgba(120,0,60,0.16)]  leading-[0.82] tracking-tight text-white opacity-0">
             <span className="text-stroke-lg block">สอบติด</span>
             <span className="text-stroke-lg relative mt-1.5 block w-max max-w-full">ไปด้วยกัน</span>
           </h1>
@@ -88,7 +88,7 @@ export function Hero() {
             </Button>
           </div>
           <div className="mt-8.5 opacity-0">
-            <p className="mb-3 text-sm font-semibold tracking-wide text-white/80">คติพจน์ของเรา</p>
+            <p className="mb-3 text-sm tracking-wide text-white/80">คติพจน์ของเรา</p>
             <div className="flex flex-wrap items-center gap-2 text-lg  w-fit">
               <p className="border px-4 rounded border-white/50">ใส่ใจ</p>
               <p className="border px-4 rounded border-white/50">ใกล้ชิด</p>
@@ -105,11 +105,11 @@ export function Hero() {
             <Image src={tKedPhoto} alt="พี่เกด ติวเตอร์ภาษาอังกฤษของ The Progress" className="block aspect-500/779 size-full object-cover object-top" sizes="(max-width: 1024px) 45vw, 320px" />
           </div>
 
-          <div className="hero-sticker-1 text-stroke absolute top-[14%] left-[-2%] z-3 rounded-ui bg-purple-sticker px-5 py-3 leading-tight text-white shadow-[0_16px_30px_rgba(120,0,60,0.3)] opacity-0">
-            <b className="font-display block text-xl font-extrabold">พี่วิน &amp; พี่เกด</b>
-            <small className="text-sm font-semibold">สอนเอง ดูแลเอง ทุกคน</small>
+          <div className="hero-sticker-1 absolute top-[14%] left-[-2%] z-3 rounded-ui bg-purple-sticker px-5 py-3 leading-tight text-white shadow-[0_16px_30px_rgba(120,0,60,0.3)] opacity-0">
+            <b className="block text-xl text-stroke">พี่วิน &amp; พี่เกด</b>
+            <small className="text-sm ">สอนเอง ดูแลเอง ทุกคน</small>
           </div>
-          <div className="hero-sticker-2 text-stroke absolute right-[-1%] bottom-[9%] z-3 rounded-ui bg-gold px-4.5 py-2.25 font-display text-base font-bold text-ink shadow-[0_16px_30px_rgba(120,0,60,0.3)] opacity-0">
+          <div className="hero-sticker-2 text-stroke absolute right-[-1%] bottom-[9%] z-3 rounded-ui bg-gold px-4.5 py-2.25 text-base text-ink shadow-[0_16px_30px_rgba(120,0,60,0.3)] opacity-0">
             TGAT · A-Level
           </div>
 

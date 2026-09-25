@@ -50,7 +50,7 @@ export function StudentSuccess() {
     <section aria-label="รายชื่อน้องสอบติด" className="relative pt-9 bg-linear-to-b from-blush to-tint-pink py-4">
       {/* container's own left gutter/centering, reproduced by hand so this row can start where .container would but still bleed its right edge to the true viewport edge. */}
       <div className="flex flex-col gap-y-8 ">
-        <h2 className="font-display spark-after lg:text-center font-bold gap-2.5 md:text-5xl text-3xl container text-stroke-lg max-lg:px-5 tracking-tight text-balance">
+        <h2 className="spark-after lg:text-center gap-2.5 section-title container">
           ตัวอย่างความสำเร็จของลูกศิษย์ <span className="text-brand">The Progress</span>
         </h2>
 

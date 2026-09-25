@@ -87,7 +87,7 @@ function TabPanel({ id }: { id: WhyTabId }) {
           >
             <button type="button" aria-expanded={open} onClick={() => setOpenIndex(open ? -1 : index)} className="flex w-full items-center justify-between gap-4 px-6.5 py-5 text-left">
               <span>
-                <b className="font-display block text-xl font-bold">{item.title}</b>
+                <b className="block text-xl">{item.title}</b>
                 <span className="mt-0.5 block text-sm text-ink-soft">{item.desc}</span>
               </span>
               <span className={cn("grid size-10 shrink-0 place-items-center rounded-ui transition-colors", open ? "bg-grad-pink text-white" : "bg-tint-pink text-brand-deep")}>
@@ -169,7 +169,7 @@ export function WhyUs() {
                 >
                   <Icon className="lg:size-10 size-8 shrink-0" />
                   <span>
-                    <b className={cn("font-display block text-2xl font-extrabold", active ? "text-white" : "text-brand-deep")}>{pillar.label}</b>
+                    <b className={cn("block text-2xl", active ? "text-white" : "text-brand-deep")}>{pillar.label}</b>
                     <span className={cn("block text-sm", active ? "text-white" : "text-ink-soft")}>{pillar.sub}</span>
                   </span>
                 </button>

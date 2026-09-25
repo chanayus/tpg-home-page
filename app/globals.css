@@ -3,19 +3,21 @@
 :root {
   --brand: #ff007e;
   --brand-deep: #c2005f;
-  --brand-hover: #c2005f;
   --purple: #a145ff;
   --purple-sticker: #9333ea;
   --gold: #ffad02;
   --ink: #2b1220;
   --ink-soft: #6d4a5e;
-  --cream: #ffffff;
   --blush: #fff0f7;
   --tint-pink: #ffe1f0;
   --tint-purple: #f1e4ff;
   --tint-yellow: #fff0cc;
   --hair: rgba(255, 0, 126, 0.14);
   --line-green: #06c755;
+
+  --swiper-pagination-color: var(--brand);
+  --swiper-pagination-bullet-inactive-color: var(--brand-deep);
+  --swiper-pagination-bullet-inactive-opacity: 0.3;
   --grad-pink: linear-gradient(135deg, #ff2d97 0%, #ff007e 55%, #e0006f 100%);
   --grad-photo: linear-gradient(165deg, #fff0f8, #ffb5d9);
   --grad-hero: radial-gradient(46% 60% at 100% 0%, #ffd2ea 0%, rgba(255, 210, 234, 0) 70%), linear-gradient(255deg, #ff8cc6 0%, #ff2d97 26%, #e8006f 54%, #d1006a 100%);
@@ -29,23 +31,20 @@
 @theme inline {
   --color-brand: var(--brand);
   --color-brand-deep: var(--brand-deep);
-  --color-brand-hover: var(--brand-hover);
   --color-purple: var(--purple);
   --color-purple-sticker: var(--purple-sticker);
   --color-gold: var(--gold);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
-  --color-cream: var(--cream);
   --color-blush: var(--blush);
   --color-tint-pink: var(--tint-pink);
   --color-tint-purple: var(--tint-purple);
   --color-tint-yellow: var(--tint-yellow);
   --color-line-green: var(--line-green);
 
-  --font-display: var(--font-fc-friday), var(--font-noto-sans-thai), system-ui, sans-serif;
   --font-sans: var(--font-fc-friday), var(--font-noto-sans-thai), system-ui, sans-serif;
 
-  --text-section: clamp(2rem, 4.6vw, 3rem);
+  --text-section: clamp(2.25rem, 4.6vw, 3rem);
   --spacing-section: clamp(3.5rem, 8vw, 6.5rem);
 
   --tracking-tight: -0.01em;
@@ -57,8 +56,11 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   body {
-    background: var(--cream);
+    background: #fff;
     color: var(--ink);
     font-family: var(--font-sans);
   }
@@ -76,7 +78,7 @@
 
   ::selection {
     background: var(--brand);
-    color: var(--cream);
+    color: #fff;
   }
 }
 
@@ -116,7 +118,7 @@
 }
 
 @utility section-title {
-  @apply text-stroke-lg spark-after font-display text-section font-extrabold;
+  @apply text-stroke-lg spark-after text-section text-balance;
 }
 
 @utility grain-overlay {
@@ -231,4 +233,8 @@
 
 @utility animate-marquee {
   animation: tp-marquee 46s linear infinite;
+}
+
+html:has(#home-page) {
+  font-size: clamp(14px, 0.84vw, 16px);
 }

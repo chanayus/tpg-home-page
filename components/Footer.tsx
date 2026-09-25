@@ -20,7 +20,7 @@ export function Footer() {
         <div className="flex lg:flex-row justify-between lg:items-center flex-col gap-8 flex-1">
           <Image src={logo} alt="" className="size-22" priority />
 
-          <nav aria-label="ช่องทางติดตาม" className="flex gap-2 flex-wrap">
+          <nav aria-label="ช่องทางติดตาม" className="flex gap-2 flex-wrap max-sm:max-w-84">
             {socials.map((social) => (
               <Button key={social.name} variant="glass" href={social.href} size="sm">
                 {social.name}

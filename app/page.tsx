@@ -9,7 +9,7 @@ import { WhyUs } from "../components/home/WhyUs";
 
 export default function Home() {
   return (
-    <main className="flex-1 grid-tint-bg ">
+    <main className="flex-1 grid-tint-bg" id="home-page">
       <Hero />
       <StudentSuccess />
       <StudentComments />

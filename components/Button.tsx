@@ -5,10 +5,10 @@ import { cn } from "../lib/cn";
 type Variant = "solid" | "white" | "glass" | "line" | "line-solid" | "nav";
 type Size = "sm" | "md" | "lg";
 
-const BASE = "flex items-center justify-center gap-2 rounded-ui font-bold whitespace-nowrap text-stroke hover:translate-y-0.5 transition-all duration-200 ease-out";
+const BASE = "flex items-center justify-center gap-2 rounded-ui whitespace-nowrap hover:translate-y-0.5 transition-all duration-200 ease-out";
 
 const VARIANT_CLASS: Record<Variant, string> = {
-  solid: "text-white bg-brand hover:bg-brand-hover",
+  solid: "text-white bg-brand hover:bg-brand-deep",
   white: "bg-white text-brand-deep hover:bg-white/80 ",
   glass: "bg-white/20 text-white border border-white/20 backdrop-blur hover:bg-white/35",
   line: "bg-tint-pink text-brand-deep border border-brand-deep/20 hover:bg-brand-deep/15",

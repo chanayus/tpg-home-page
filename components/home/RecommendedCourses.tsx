@@ -1,7 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Button } from "../Button";
 import { Reveal } from "../Reveal";
+import { SliderArrow } from "../SliderArrow";
 import { IconSpark } from "./SvgProps";
 // import { collection, getDocs, query, orderBy } from 'firebase/firestore';
 // import { firestore } from '../utils/firebaseClient';
@@ -52,6 +57,33 @@ const mockupData: Course[] = [
     price: 3500,
     imageUrl: "/images/course.jpg",
     gradientType: "orange",
+  },
+  {
+    id: "a-level-physics",
+    title: "คอร์ส A-Level ฟิสิกส์",
+    subtitle: "A-LEVEL ฟิสิกส์",
+    description: "สรุปสูตรสำคัญ ตะลุยโจทย์แนวข้อสอบย้อนหลัง",
+    price: 4200,
+    imageUrl: "/images/course.jpg",
+    gradientType: "green",
+  },
+  {
+    id: "a-level-chem",
+    title: "คอร์ส A-Level เคมี",
+    subtitle: "A-LEVEL เคมี",
+    description: "เข้าใจหลักการ ไม่ต้องท่องจำ พร้อมแบบฝึกหัดทุกบท",
+    price: 4200,
+    imageUrl: "/images/course.jpg",
+    gradientType: "purple",
+  },
+  {
+    id: "a-level-bio",
+    title: "คอร์ส A-Level ชีววิทยา",
+    subtitle: "A-LEVEL ชีวะ",
+    description: "ภาพประกอบเข้าใจง่าย สรุปเนื้อหาครบทุกระบบ",
+    price: 3900,
+    imageUrl: "/images/course.jpg",
+    gradientType: "blue",
   },
 ];
 
@@ -107,32 +139,58 @@ export function RecommendedCourses() {
           </Reveal>
         </div>
 
-        <ul className="grid max-w-290 grid-cols-[repeat(auto-fit,minmax(min(100%,270px),1fr))] gap-6">
-          {courses.map((course) => (
-            <Reveal as="li" key={course.id}>
-              <article className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-[0_22px_44px_rgba(255,0,126,0.16)] transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_28px_52px_rgba(255,0,126,0.24)]">
-                <figure style={{ background: GRADIENT_BY_TYPE[course.gradientType] }} className="relative flex aspect-video items-end overflow-hidden px-6.5 pb-4">
-                  <div className="grain-overlay absolute" />
-                  <IconSpark className="absolute top-[14%] right-[9%] w-11 text-white/90" />
-                  <IconSpark className="absolute top-[54%] right-[26%] w-4.5 text-white/60" />
-                  <span className="text-stroke z-1 relative border border-brand/50 rounded-ui bg-white px-3.5 py-1 font-display text-base font-bold text-brand-deep shadow-[0_8px_16px_rgba(120,0,60,0.2)]">
-                    {course.subtitle}
-                  </span>
-
-                  <img src={course.imageUrl ?? "/images/course.jpg"} className="size-full absolute top-0 left-0 object-cover" alt="" />
-                </figure>
-                <div className="flex flex-1 flex-col items-start gap-2.5 px-6.5 pt-5.5 pb-8">
-                  <h3 className="font-display text-xl font-bold text-ink">{course.title}</h3>
-                  <p className="text-base leading-relaxed text-ink-soft">{course.description}</p>
-                  <Button variant="line" href="/courses" className="mt-auto px-5.5 py-2.25 text-base">
-                    ดูรายละเอียด →
-                  </Button>
-                </div>
-              </article>
-            </Reveal>
-          ))}
-        </ul>
+        <Reveal delay={0.35} amount="some">
+          <div className="relative">
+            <Swiper
+              modules={[Navigation, Pagination]}
+              wrapperTag="ul"
+              spaceBetween={16}
+              slidesPerView={1.15}
+              centeredSlides
+              breakpoints={{
+                640: { slidesPerView: 2, spaceBetween: 24, centeredSlides: false },
+                1024: { slidesPerView: 3, spaceBetween: 24, centeredSlides: false },
+                1280: { slidesPerView: 4, spaceBetween: 24, centeredSlides: false },
+              }}
+              navigation={{ prevEl: ".courses-prev", nextEl: ".courses-next" }}
+              pagination={{ clickable: true, el: ".courses-pagination" }}
+              className="overflow-visible!"
+            >
+              {courses.map((course) => (
+                <SwiperSlide key={course.id} tag="li" className="h-auto! w-full">
+                  <CourseCard course={course} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            {/* ไม่ต้องเช็กจำนวนคอร์สเอง — ถ้าทุกใบพอดีจอ Swiper จะ lock แล้วซ่อนลูกศร/จุดให้เอง (watchOverflow) */}
+            <SliderArrow direction="prev" selectorClass="courses-prev" label="คอร์สก่อนหน้า" />
+            <SliderArrow direction="next" selectorClass="courses-next" label="คอร์สถัดไป" />
+          </div>
+          <div className="courses-pagination mt-6 flex items-center justify-center" />
+        </Reveal>
       </div>
     </section>
+  );
+}
+
+function CourseCard({ course }: { course: Course }) {
+  return (
+    <article className="mx-auto max-w-120 flex h-full w-full flex-col overflow-hidden rounded-2xl bg-white shadow-[0_22px_44px_rgba(255,0,126,0.16)] transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-[0_28px_52px_rgba(255,0,126,0.24)]">
+      <figure style={{ background: course.imageUrl ? "#fff" : GRADIENT_BY_TYPE[course.gradientType] }} className="relative flex aspect-video items-end overflow-hidden px-5 pb-4">
+        <div className="grain-overlay absolute" />
+        <IconSpark className="absolute top-[14%] right-[9%] w-11 text-white/90" />
+        <IconSpark className="absolute top-[54%] right-[26%] w-4.5 text-white/60" />
+        <span className="text-stroke z-1 relative border border-brand/50 rounded-ui bg-white px-3.5 py-0.5 text-brand-deep shadow-[0_8px_16px_rgba(120,0,60,0.2)]">{course.subtitle}</span>
+
+        <img src={course.imageUrl ?? "/images/course.jpg"} className="size-full absolute top-0 left-0 object-cover" alt="" />
+      </figure>
+      <div className="flex flex-1 flex-col items-start gap-4 px-6.5 pt-5.5 pb-8">
+        <h3 className="text-xl text-ink">{course.title}</h3>
+        <p className="text-base/tight text-ink-soft">{course.description}</p>
+        <Button variant="line" href="/courses" className="mt-auto px-5.5 py-2.25 text-base">
+          ดูรายละเอียด →
+        </Button>
+      </div>
+    </article>
   );
 }
